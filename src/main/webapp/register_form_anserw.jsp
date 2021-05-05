@@ -10,6 +10,7 @@
 
 <%@ page import="pwr.edu.czart_boczar_projekt.entity.Employee" %>
 <%@ page import="pwr.edu.czart_boczar_projekt.entity.Login" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 
 
 <html>
@@ -54,21 +55,24 @@
 
 
         <%
-            // po prawej odpowiedzi z formularza - nazwy pól z inpu name="password"
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-dd");
+            LocalDate birthDate = LocalDate.parse(request.getParameter("birth_date"), dtf);
+
+            // po prawej odpowiedzi z formularza - nazwy pól z input name="password"
             String name = request.getParameter("name");
             String surname = request.getParameter("surname");
             String username = request.getParameter("username");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
-            String status = String.valueOf(request.getParameter("status"));
-            String position = "w pracy";
-            LocalDate birthDate = LocalDate.parse(request.getParameter("birth_date"));
-//            String education = request.getParameter("education");
+            String position = String.valueOf(request.getParameter("position"));// manager/employee
+            String status = "w pracy";
 
+            String education = String.valueOf(request.getParameter("education")); // wyższe zawodowe
+            int worked_years = Integer.valueOf(request.getParameter("worked_years"));
+            String department= String.valueOf(request.getParameter("working_department")); // dział pracy
 
-//            String first_name, String last_name, LocalDate birth, String email, String phone, String position, String status
-//            String login, String password, Employee employee
 
 
             Employee u = new Employee(name, surname, birthDate, email, phone, position, status);
@@ -77,23 +81,26 @@
         Przyjęto dane
         <%--        dane z nazw pól (lewa strona - Java)--%>
         <h2>Rejestracja przebiegła pomyślnie</h2>
-        Imię: ${param.name}
+        Imię: <% out.println(u.getFirst_name());%>
         <br>
-        Nazwisko: ${param.surname}
+        Nazwisko: <% out.println(u.getLast_name());%>
         <br>
-        Nazwa użytkownika: ${param.username}
+        Email: <% out.println(u.getEmail());%>
+       <br>
+        Phone: <% out.println(u.getPhone());%>
         <br>
-        Email: ${param.email}
+        Date: <% out.println(u.getBirth());%>
         <br>
-        Password: ${param.password}
+        Rola: <% out.println(u.getPosition());%>
         <br>
-        Phone: ${param.phone}
         <br>
-        Date: ${param.birthDay}
+        <h2>Dane logowania</h2>
         <br>
-        Rola: ${param.status}
+        Nazwa użytkownika: <% out.println(user.getLogin());%>
         <br>
-        <%--        To string: <% out.println(u.toString());%>--%>
+        Password: <% out.println(user.getPassword());%>
+        <br>
+
     </div>
 </div>
 

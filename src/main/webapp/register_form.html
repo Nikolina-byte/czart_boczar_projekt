@@ -75,17 +75,46 @@
                                placeholder="Podaj nazwę użytkownika">
                     </div>
 
-
                     <div class="form-group">
                         <label for="password">Hasło</label>
                         <input type="password" class="form-control" name="password" id="password">
                     </div>
 
                     <div class="form-group">
-                        <label for="status">Rola</label>
-                        <select id="status" name=status">
+                        <label for="position">Rola</label>
+                        <select id="position" name="position">
                             <option value="employee">Employee</option>
                             <option value="manager">Manager</option>
+                        </select>
+                    </div>
+                    <!--                    edukacja-->
+
+                    <div class="form-group">
+                        <label for="education">Edukacja</label>
+                        <select id="education" name="education">
+                            <option value="Wyższe">Szkoła wyższa</option>
+                            <option value="Policealne">Szkoła policealna(technikum, liceum)</option>
+                            <option value="Ogólnokształcące">Średnia szkoła ogólnokształcąca</option>
+                            <option value="Zawodowe">Średnia szkoła zawodowa</option>
+                            <option value="Zasadnicze">Zasadnicza szkoła zawodowa</option>
+                            <option value="Podstawowe">Szkoła podstawowa</option>
+                        </select>
+                    </div>
+
+                    <!--                    ilość przepracownych lat-->
+
+                    <div class="form-group">
+                        <label for="worked_years">Przepracowane lata</label>
+                        <input type="number" min=0 class="form-control" name="worked_years" id="worked_years">
+                    </div>
+
+                    <!--                    department-->
+                    <div class="form-group">
+                        <label for="working_department">Dział</label>
+                        <select id="working_department" name="working_department">
+                            <option value="Customer relationship management">Customer relationship management</option>
+                            <option value="Shared Service Center">Shared Service Center</option>
+                            <option value="Back office">Back office</option>
                         </select>
                     </div>
 
