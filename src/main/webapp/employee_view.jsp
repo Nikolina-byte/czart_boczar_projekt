@@ -25,18 +25,18 @@
 </nav>
 
 
-<c:url var="department" value="AdminDepartmentServlet">
+<c:url var="department" value="EmployeeApplicationServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
-<c:url var="application" value="AdminApplicationServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
-<c:url var="employee" value="AdminEmployeeServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
-<c:url var="history" value="AdminHistoryServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
+<%--<c:url var="application" value="AdminApplicationServlet">--%>
+<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
+<%--</c:url>--%>
+<%--<c:url var="employee" value="AdminEmployeeServlet">--%>
+<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
+<%--</c:url>--%>
+<%--<c:url var="history" value="AdminHistoryServlet">--%>
+<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
+<%--</c:url>--%>
 
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">

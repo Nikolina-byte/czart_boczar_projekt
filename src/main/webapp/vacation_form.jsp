@@ -29,15 +29,15 @@
 <c:url var="department" value="AdminDepartmentServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
-<c:url var="application" value="AdminApplicationServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
-<c:url var="employee" value="AdminEmployeeServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
-<c:url var="history" value="AdminHistoryServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
+<%--<c:url var="application" value="AdminApplicationServlet">--%>
+<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
+<%--</c:url>--%>
+<%--<c:url var="employee" value="AdminEmployeeServlet">--%>
+<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
+<%--</c:url>--%>
+<%--<c:url var="history" value="AdminHistoryServlet">--%>
+<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
+<%--</c:url>--%>
 
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
@@ -60,8 +60,8 @@
     <div class="w3-container">
 
 
-        <h1>Załóż konto</h1>
-        <form action="vacation_form_anserw.jsp">
+        <h1>Złóż wniosek o urlop</h1>
+        <form action="EmployeeApplicationServlet" method="get">
             <fieldset>
 
                 <!--                String leaveType, LocalDate startDate, LocalDate endDate, String status, Employee employee-->
@@ -85,8 +85,8 @@
                         <option value="wolontariat">Wolontariar</option>
                         <option value="narodzenie dziecka">Narodziny dziecka</option>
                         <option value="ślub własny">Ślub własny</option>
-                        <option value="pogrzeb (bardzo bliska rodzina)">Pogrzeb (bardzo bliska rodzina)"</option>
-                        <option value="pogrzeb (dalsza rodzina)">Pogrzeb (dalszarodzina)"</option>
+                        <option value="pogrzeb (bardzo bliska rodzina)">Pogrzeb (bardzo bliska rodzina)</option>
+                        <option value="pogrzeb (dalsza rodzina)">Pogrzeb (dalszarodzina)</option>
                         <option value="ślub dziecka">Ślub dziecka</option>
                     </select>
                 </div>
