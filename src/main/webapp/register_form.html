@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Formularz</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style> .header {
+        background: url(./img/img_1.jpg) no-repeat center center;
+        background-size: cover;
+        height: 500px;
+        text-align: center;
+    }
+    </style>
+
+</head>
+
+<body>
+<nav class="nav" role="navigation">
+    <div id="navbar" class="navbar-collapse collapse navbar-right">
+        <a class="btn" href="login.html" role="button">Zaloguj się</a></p>
+    </div>
+
+    <div class="container">
+        <ul>
+            <li><a href="index.html">Strona główna</a></li>
+        </ul>
+    </div>
+</nav>
+
+<a name="up"></a>
+
+
+<div class="header">
+</div>
+
+<div class="main">
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Załóż konto</h1>
+            <form action="register_form_anserw.jsp">
+                <fieldset>
+
+                    <div class="form-group">
+                        <label for="name">Imię</label>
+                        <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp"
+                               placeholder="Podaj swoje imię">
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">Nazwisko</label>
+                        <input type="text" class="form-control" name="surname" id="surname"
+                               aria-describedby="surnameHelp"
+                               placeholder="Podaj swoje nazwisko">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Adres email</label>
+                        <input type="email" class="form-control" name="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefon</label>
+                        <input type="tel" class="form-control" name="phone" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="birth_date">Data urodzenia</label>
+                        <input type="date" class="form-control" name="birth_date" id="birth_date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Nazwa użytkownika</label>
+                        <input type="text" class="form-control" name="username" id="username"
+                               aria-describedby="usernameHelp"
+                               placeholder="Podaj nazwę użytkownika">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Hasło</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Rola</label>
+                        <select id="position" name="position">
+                            <option value="employee">Employee</option>
+                            <option value="manager">Manager</option>
+                        </select>
+                    </div>
+                    <!--                    edukacja-->
+
+                    <div class="form-group">
+                        <label for="education">Edukacja</label>
+                        <select id="education" name="education">
+                            <option value="Wyższe">Szkoła wyższa</option>
+                            <option value="Policealne">Szkoła policealna(technikum, liceum)</option>
+                            <option value="Ogólnokształcące">Średnia szkoła ogólnokształcąca</option>
+                            <option value="Zawodowe">Średnia szkoła zawodowa</option>
+                            <option value="Zasadnicze">Zasadnicza szkoła zawodowa</option>
+                            <option value="Podstawowe">Szkoła podstawowa</option>
+                        </select>
+                    </div>
+
+                    <!--                    ilość przepracownych lat-->
+
+                    <div class="form-group">
+                        <label for="worked_years">Przepracowane lata</label>
+                        <input type="number" min=0 class="form-control" name="worked_years" id="worked_years">
+                    </div>
+
+                    <!--                    department-->
+                    <div class="form-group">
+                        <label for="working_department">Dział</label>
+                        <select id="working_department" name="working_department">
+                            <option value="Customer relationship management">Customer relationship management</option>
+                            <option value="Shared Service Center">Shared Service Center</option>
+                            <option value="Back office">Back office</option>
+                        </select>
+                    </div>
+
+
+                    <!-- <div class="form-group">
+                        <label for="password">Potwierdź hasło</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div> -->
+
+                    <!-- <label for="checkbox">Hasło</label> -->
+
+                    <!-- <small class="form-text text-muted"><input type="checkbox" class="form-control" name="password" id="password"> -->
+
+
+                    <button type="submit" class="btn btn-primary">Zarejestruj</button>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer">
+    <p>
+        <a href="https://pbs.twimg.com/media/DXoBwnAVQAAvx0N.jpg">&copy; Adrianna Boczar 250319</a>
+    </p>
+</div>
+
+</body>
+</html>
