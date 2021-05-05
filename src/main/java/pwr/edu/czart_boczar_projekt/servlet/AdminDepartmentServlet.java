@@ -31,23 +31,12 @@ public class AdminDepartmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
         response.setContentType("text/html");
-
-        // Wszystkie Departamenty
-        List<DepartamentInformationView> departaments = null;
-        try {
-            departaments = dbUtil.getDepartments();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        request.setAttribute("DEPARTMENT_LIST", departaments);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin_department_view.jsp");
-        dispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
-
+        String command = request.getParameter("EMPLOYEE");
+        System.out.println(command);
         // Wszystkie Departamenty
         List<DepartamentInformationView> departaments = null;
         try {

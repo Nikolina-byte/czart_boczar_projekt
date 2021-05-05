@@ -13,6 +13,11 @@
             <a class="nav-link active" href="#">Informacje o departamencie</a>
         </li>
     </ul>
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a class="nav-link active" href="AdminApplicationServlet">Informacje o departamencie</a>
+        </li>
+    </ul>
 </div>
 
 <h1><%= "Depatamenty" %></h1>

@@ -39,7 +39,8 @@ public class LoginServlet extends HttpServlet {
             if (!(loginData == null)) {
                 if (password.equals(loginData.getPassword())) {
                     if (loginData.getEmployee().getPosition().equals("manager")) {
-                        request.setAttribute("EMPLOYEE", loginData.getEmployee().getId());
+                        request.setAttribute("EMPLOYEE", String.valueOf(loginData.getEmployee().getId()));
+                        System.out.println(loginData.getEmployee().getId());
                         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin_view.jsp");
                         dispatcher.forward(request, response);
                     }else {
