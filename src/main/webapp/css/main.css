@@ -1,0 +1,113 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 940px;
+    padding: 0 10px;
+}
+
+.header {
+    /*background: url(./img/background.jpg) no-repeat center center;*/
+    background-size: cover;
+    height: 450px;
+    text-align: center;
+}
+
+
+.header .container {
+    position: relative;
+    top: 200px;
+}
+
+
+
+.nav {
+    background: #000;
+    height: 80px;
+    width: 100%;
+}
+
+.nav ul {
+    height: 80px;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.nav ul li {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    height: 80px;
+    line-height: 80px;
+    list-style: none;
+    padding: 0 10px;
+    transition: background .5s;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
+.btn {
+    color: #fff;
+    list-style: none;
+    background: #5bc0de;
+    padding: 10px 40px;
+    display: inline-block;
+    text-decoration: none;
+    transition: background .5s;
+}
+
+.btn:hover, .nav ul li:hover {
+    margin: 0 auto;
+    background: #5bc0de;
+    cursor: pointer;
+    transition: background .5s;
+}
+
+.main .container {
+    margin: 80px auto;
+}
+
+.main img {
+    float: left;
+    margin: 50px 80px 50px 0;
+}
+
+.footer {
+    background: #000;
+    height: 40px;
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+.footer p {
+    color: #fff;
+    font-size: 14px;
+    height: 60px;
+    line-height: 100px;
+    margin: 0;
+}
+
+.footer p a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    height: 20px;
+    line-height: 40px;
+    margin: 0;
+}
+
+
+
