@@ -32,7 +32,13 @@
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
     <h3 class="w3-bar-item">Menu</h3>
     <a href="${department}" class="w3-bar-item w3-button">Informacje o dziale</a>
-    <a href="#" class="w3-bar-item w3-button">Link 2</a>
+    <div class="w3-dropdown-hover">
+        <button class="w3-button">Wnioski urlopowe<i class="fa fa-caret-down"></i></button>
+        <div class="w3-dropdown-content w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button">Aktualne</a>
+            <a href="#" class="w3-bar-item w3-button">Archiwum</a>
+        </div>
+    </div>
     <a href="#" class="w3-bar-item w3-button">Link 3</a>
 </div>
 
@@ -40,7 +46,7 @@
 <div style="margin-left:25%">
 
     <div class="w3-container w3-teal">
-        <h1>Witaj Imię!</h1>
+        <h1>Witaj ${EMPLOYEE}!</h1>
     </div>
 
 <%--    <img src="img_car.jpg" alt="Car" style="width:100%">--%>
