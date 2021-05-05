@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class DBUtilAdmin extends DBUtil{
     private static final String URL = "jdbc:mysql://localhost:3306/holidaydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=CET";
     private static final String NAME = "root";
-    private static final String PASSWORD = "qwerty";
+    private static final String PASSWORD = "herbatka1";
     private Connection connection = null;
 
     public DBUtilAdmin() {
