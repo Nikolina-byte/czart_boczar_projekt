@@ -104,7 +104,7 @@ public class DBUtilManager extends DBUtil {
     }
 
     // Zwraca wszystkich departamentów
-    public DepartamentInformationView getDepartmentByID(String departmentID) throws Exception {
+    public DepartamentInformationView getDepartmentByManager(String employeeName) throws Exception {
         DepartamentInformationView departament = null;
 
         Connection conn = null;
@@ -114,7 +114,7 @@ public class DBUtilManager extends DBUtil {
         try {
             conn = dbConnect();
 
-            String sql = "SELECT * FROM department_information WHERE id=" + departmentID;
+            String sql = "SELECT * FROM department_information WHERE manager='" + employeeName +"'";
             statement = conn.createStatement();
 
             resultSet = statement.executeQuery(sql);
@@ -205,7 +205,7 @@ public class DBUtilManager extends DBUtil {
     }
 
     // Zwraca listę pracowników z danego departamentu
-    public List<EmployeeInformationView> getEmployeeByDepartment(String employeeDepartment) throws Exception {
+    public List<EmployeeInformationView> getEmployeeByManager(String employeeManager) throws Exception {
         List<EmployeeInformationView> employee = new ArrayList<>();
 
         Connection conn = null;
@@ -215,7 +215,7 @@ public class DBUtilManager extends DBUtil {
         try {
             conn = dbConnect();
 
-            String sql = "SELECT * FROM user_information WHERE Department = '" + employeeDepartment+ "'";
+            String sql = "SELECT * FROM user_information WHERE Manager = '" + employeeManager + "'";
             statement = conn.createStatement();
 
             resultSet = statement.executeQuery(sql);
@@ -343,7 +343,7 @@ public class DBUtilManager extends DBUtil {
     }
 
     //Zwraca listę wnisków na podstawie stanu
-    public List<ApplicationInformationView> getApplicationByStatus(String statusApplication) throws Exception {
+    public List<ApplicationInformationView> getApplicationByStatusAndManager(String statusApplication, int manager) throws Exception {
         List<ApplicationInformationView> applications = new ArrayList<>();
 
         Connection conn = null;
@@ -353,7 +353,8 @@ public class DBUtilManager extends DBUtil {
         try {
             conn = dbConnect();
 
-            String sql = "SELECT * FROM application_information WHERE Status = '" + statusApplication + "'";
+            String sql = "SELECT * FROM application_information WHERE Status = '" + statusApplication + "'" +
+                    " AND MANAGER = " + manager;
             statement = conn.createStatement();
 
             resultSet = statement.executeQuery(sql);

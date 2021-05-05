@@ -1050,7 +1050,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <table id="293" parent="2" name="project"/>
     <table id="294" parent="2" name="vacation_data"/>
     <view id="295" parent="2" name="application_information">
-      <SourceTextLength>809</SourceTextLength>
+      <SourceTextLength>841</SourceTextLength>
       <Definer>root@localhost</Definer>
     </view>
     <view id="296" parent="2" name="department_information">
@@ -1438,81 +1438,85 @@ employee_id</ColNames>
       <Position>8</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="375" parent="295" name="Projects">
+    <column id="375" parent="295" name="Manager">
       <Position>9</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="376" parent="295" name="Projects">
+      <Position>10</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="376" parent="296" name="id">
+    <column id="377" parent="296" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="377" parent="296" name="Name">
+    <column id="378" parent="296" name="Name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="378" parent="296" name="Employees">
+    <column id="379" parent="296" name="Employees">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="379" parent="296" name="Manager">
+    <column id="380" parent="296" name="Manager">
       <Position>4</Position>
       <DataType>varchar(91)|0s</DataType>
     </column>
-    <column id="380" parent="297" name="id">
+    <column id="381" parent="297" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="381" parent="297" name="Name">
+    <column id="382" parent="297" name="Name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="382" parent="297" name="Description">
+    <column id="383" parent="297" name="Description">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="383" parent="297" name="Deadline">
+    <column id="384" parent="297" name="Deadline">
       <Position>4</Position>
       <DataType>date|0s</DataType>
     </column>
-    <column id="384" parent="297" name="Employees">
+    <column id="385" parent="297" name="Employees">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="385" parent="298" name="id">
+    <column id="386" parent="298" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="386" parent="298" name="Name">
+    <column id="387" parent="298" name="Name">
       <Position>2</Position>
       <DataType>varchar(91)|0s</DataType>
     </column>
-    <column id="387" parent="298" name="Birth">
+    <column id="388" parent="298" name="Birth">
       <Position>3</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="388" parent="298" name="E-mail">
+    <column id="389" parent="298" name="E-mail">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="389" parent="298" name="Phone">
+    <column id="390" parent="298" name="Phone">
       <Position>5</Position>
       <DataType>varchar(12)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="390" parent="298" name="Department">
+    <column id="391" parent="298" name="Department">
       <Position>6</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="391" parent="298" name="Projects">
+    <column id="392" parent="298" name="Projects">
       <Position>7</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="392" parent="298" name="Manager">
+    <column id="393" parent="298" name="Manager">
       <Position>8</Position>
       <DataType>varchar(91)|0s</DataType>
     </column>

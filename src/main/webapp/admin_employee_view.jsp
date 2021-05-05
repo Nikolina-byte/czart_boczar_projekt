@@ -37,26 +37,44 @@
     </ul>
 </div>
 
-<h1><%= "Depatamenty" %></h1>
+<h1><%= "Pracownicy projektu 1:" %></h1>
 <table border>
     <thead>
     <tr>
         <th scope="col">id</th>
         <th scope="col">name</th>
-        <th scope="col">employees</th>
+        <th scope="col">birth</th>
+        <th scope="col">email</th>
+        <th scope="col">phone</th>
+        <th scope="col">department</th>
         <th scope="col">manager</th>
     </tr>
     </thead>
     <tbody>
 
-        <tr >
-            <td>${DEPARTMENT_LIST.getId()}</td>
-            <td>${DEPARTMENT_LIST.getName()}</td>
-            <td>${DEPARTMENT_LIST.getEmployees()}</td>
-            <td>${DEPARTMENT_LIST.getManager()}</td>
-        </tr>
+    <c:forEach var="tmpCereal" items="${EMPLOYEE_LIST}">
 
-    </tbody>
+    <c:url var="deleteLink" value="AdminEmployeeServlet">
+        <c:param name="command" value="DELETE"></c:param>
+        <c:param name="employeeID" value="${tmpCereal.id}"></c:param>
+    </c:url>
+
+    <tr >
+        <td>${tmpCereal.getId()}</td>
+        <td>${tmpCereal.getName()}</td>
+        <td>${tmpCereal.getBirth()}</td>
+        <td>${tmpCereal.getEmail()}</td>
+        <td>${tmpCereal.getPhone()}</td>
+        <td>${tmpCereal.getDepartment()}</td>
+        <td>${tmpCereal.getProjects()}</td>
+        <td>${tmpCereal.getManager()}</td>
+        <td><a href="${deleteLink}"
+               onclick="if(!(confirm('Czy na pewno chcesz usunąć tego pracownika?'))) return false">
+            <button type="button" class="btn btn-danger">Usuń</button>
+        </a></td>
+    </tr>
+
+    </c:forEach>
 </table>
 
 </body>
