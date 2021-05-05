@@ -2,6 +2,8 @@ package pwr.edu.czart_boczar_projekt.servlet;
 
 import pwr.edu.czart_boczar_projekt.database.DBUtilManager;
 import pwr.edu.czart_boczar_projekt.entity.DepartamentInformationView;
+import pwr.edu.czart_boczar_projekt.entity.Employee;
+import pwr.edu.czart_boczar_projekt.entity.EmployeeInformationView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -35,17 +37,17 @@ public class AdminDepartmentServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
-        String command = request.getParameter("EMPLOYEE");
-        System.out.println(command);
-        // Wszystkie Departamenty
-        List<DepartamentInformationView> departaments = null;
+        String managerID = request.getParameter("employeeID");
+
+        DepartamentInformationView departaments = null;
         try {
-            departaments = dbUtil.getDepartments();
+            EmployeeInformationView employee = dbUtil.getEmployeeViewByID(Integer.parseInt(managerID));
+            departaments = dbUtil.getDepartmentByManager(employee.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
         request.setAttribute("DEPARTMENT_LIST", departaments);
-
+        request.setAttribute("EMPLOYEE", managerID);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin_department_view.jsp");
         dispatcher.forward(request, response);
     }

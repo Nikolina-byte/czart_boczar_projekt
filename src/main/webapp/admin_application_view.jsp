@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <head>
-    <title>Manager - Department</title>
+    <title>Historia</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
-
 </head>
 <body>
+<!--pasek główny-->
 <nav class="nav" role="navigation">
     <div id="navbar" class="navbar-collapse collapse navbar-right">
         <a class="btn" href="login.html" role="button">Zaloguj się</a>
@@ -53,71 +53,74 @@
     </div>
     <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>
 </div>
-<%--page content--%>
-<div style="margin-left:25%">
-    <div class="w3-container">
-        <h1>Informacje o Twoim dziale</h1>
-        <h2>Pracownicy</h2>
-        <ol>
-            <li>
-            </li>
-        </ol>
 
-        <h1><%= "Depatamenty" %>
-        </h1>
+
+<%--content strony--%>
+<div style="margin-left:25%">
+
+    <div class="w3-container">
+        <h1><%= "Wnioski złożone: " %></h1>
         <table border>
             <thead>
             <tr>
                 <th scope="col">id</th>
+                <th scope="col">leaveType</th>
+                <th scope="col">startDay</th>
+                <th scope="col">endDay</th>
+                <th scope="col">numberday</th>
+                <th scope="col">status</th>
                 <th scope="col">name</th>
-                <th scope="col">employees</th>
-                <th scope="col">manager</th>
+                <th scope="col">department</th>
+                <th scope="col">projects</th>
             </tr>
             </thead>
             <tbody>
 
-            <tr>
-                <td>${DEPARTMENT_LIST.getId()}</td>
-                <td>${DEPARTMENT_LIST.getName()}</td>
-                <td>${DEPARTMENT_LIST.getEmployees()}</td>
-                <td>${DEPARTMENT_LIST.getManager()}</td>
+            <c:forEach var="tmpCereal1" items="${ZLOZONE_APPLICATIONS_LIST}">
+
+            <c:url var="acceptLink" value="AdminApplicationServlet">
+                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+                <c:param name="command" value="ACCEPT"></c:param>
+                <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
+            </c:url>
+
+            <c:url var="rejctedLink" value="AdminApplicationServlet">
+                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+                <c:param name="command" value="REJECTED"></c:param>
+                <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
+            </c:url>
+
+            <tr >
+                <td>${tmpCereal1.getId()}</td>
+                <td>${tmpCereal1.getLeaveType()}</td>
+                <td>${tmpCereal1.getStartDay()}</td>
+                <td>${tmpCereal1.getEndDay()}</td>
+                <td>${tmpCereal1.getNumberDay()}</td>
+                <td>${tmpCereal1.getStatusApplicationType()}</td>
+                <td>${tmpCereal1.getEmployeeName() }</td>
+                <td>${tmpCereal1.getDepartmentName()}</td>
+                <td>${tmpCereal1.getProjects()}</td>
+                <td><a href="${acceptLink}">
+                    <button type="button" class="btn btn-success">Akceptuj</button>
+                </a>
+                    <a href="${rejctedLink}"
+                       onclick="if(!(confirm('Czy na pewno chcesz usunąć ten wniosek?'))) return false">
+                        <button type="button" class="btn btn-danger">Odrzuć</button>
+                    </a></td>
             </tr>
 
-            </tbody>
+            </c:forEach>
         </table>
-
-
-        <div>
-            <c:url var="department" value="AdminDepartmentServlet">
-                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-            </c:url>
-            <c:url var="application" value="AdminApplicationServlet">
-                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-            </c:url>
-            <c:url var="employee" value="AdminEmployeeServlet">
-                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-            </c:url>
-            <c:url var="history" value="AdminHistoryServlet">
-                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-            </c:url>
-
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="${department}">Informacje o departamencie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${application}">Wnioski do rozpatrzenia</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${employee}">Pracownicy</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${history}">Historia zwolnień</a>
-                </li>
-            </ul>
-        </div>
     </div>
+
+
+
+
+
 </div>
+
+
+
 
 
 </body>

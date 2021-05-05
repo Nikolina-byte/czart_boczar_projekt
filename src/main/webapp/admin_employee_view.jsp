@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <head>
-    <title>Manager - Department</title>
+    <title>Employee</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
-
 </head>
 <body>
+<!--pasek główny-->
 <nav class="nav" role="navigation">
     <div id="navbar" class="navbar-collapse collapse navbar-right">
         <a class="btn" href="login.html" role="button">Zaloguj się</a>
@@ -53,69 +53,59 @@
     </div>
     <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>
 </div>
-<%--page content--%>
+<%--content strony--%>
 <div style="margin-left:25%">
-    <div class="w3-container">
-        <h1>Informacje o Twoim dziale</h1>
-        <h2>Pracownicy</h2>
-        <ol>
-            <li>
-            </li>
-        </ol>
 
-        <h1><%= "Depatamenty" %>
+
+
+
+    <%--    <img src="img_car.jpg" alt="Car" style="width:100%">--%>
+
+    <div class="w3-container">
+        <p>Tu jakaś treść może motywacyjny mem</p>
+
+
+        <h1><%= "Pracownicy projektu 1:" %>
         </h1>
         <table border>
             <thead>
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">name</th>
-                <th scope="col">employees</th>
-                <th scope="col">manager</th>
+                <th scope="col">birth</th>
+                <th scope="col">email</th>
+                <th scope="col">phone</th>
+                <th scope="col">department</th>
+                <th scope="col">projects</th>
+
             </tr>
             </thead>
             <tbody>
 
+            <c:forEach var="tmpCereal" items="${EMPLOYEE_LIST}">
+
+            <c:url var="deleteLink" value="AdminEmployeeServlet">
+                <c:param name="command" value="DELETE"></c:param>
+                <c:param name="employeeID" value="${tmpCereal.id}"></c:param>
+            </c:url>
+
             <tr>
-                <td>${DEPARTMENT_LIST.getId()}</td>
-                <td>${DEPARTMENT_LIST.getName()}</td>
-                <td>${DEPARTMENT_LIST.getEmployees()}</td>
-                <td>${DEPARTMENT_LIST.getManager()}</td>
+                <td>${tmpCereal.getId()}</td>
+                <td>${tmpCereal.getName()}</td>
+                <td>${tmpCereal.getBirth()}</td>
+                <td>${tmpCereal.getEmail()}</td>
+                <td>${tmpCereal.getPhone()}</td>
+                <td>${tmpCereal.getDepartment()}</td>
+                <td>${tmpCereal.getProjects()}</td>
+
+                <td><a href="${deleteLink}"
+                       onclick="if(!(confirm('Czy na pewno chcesz usunąć tego pracownika?'))) return false">
+                    <button type="button" class="btn btn-danger">Usuń</button>
+                </a></td>
             </tr>
 
-            </tbody>
+            </c:forEach>
         </table>
-
-
-        <div>
-            <c:url var="department" value="AdminDepartmentServlet">
-                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-            </c:url>
-            <c:url var="application" value="AdminApplicationServlet">
-                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-            </c:url>
-            <c:url var="employee" value="AdminEmployeeServlet">
-                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-            </c:url>
-            <c:url var="history" value="AdminHistoryServlet">
-                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-            </c:url>
-
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="${department}">Informacje o departamencie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${application}">Wnioski do rozpatrzenia</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${employee}">Pracownicy</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${history}">Historia zwolnień</a>
-                </li>
-            </ul>
-        </div>
     </div>
 </div>
 

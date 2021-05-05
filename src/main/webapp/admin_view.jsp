@@ -5,6 +5,7 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <head>
     <title>Manager Panel</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -27,6 +28,15 @@
 <c:url var="department" value="AdminDepartmentServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
+<c:url var="application" value="AdminApplicationServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
+<c:url var="employee" value="AdminEmployeeServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
+<c:url var="history" value="AdminHistoryServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
 
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
@@ -35,11 +45,14 @@
     <div class="w3-dropdown-hover">
         <button class="w3-button">Wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
-            <a href="#" class="w3-bar-item w3-button">Aktualne</a>
-            <a href="#" class="w3-bar-item w3-button">Archiwum</a>
+            <a href="${application}" class="w3-bar-item w3-button">Do rozpatrzenia</a>
+            <a href=# class="w3-bar-item w3-button">Zrealizowane</a>
+            <a href=# class="w3-bar-item w3-button">Zaakceptowane</a>
+            <a href="${history}" class="w3-bar-item w3-button">Archiwum</a>
+
         </div>
     </div>
-    <a href="#" class="w3-bar-item w3-button">Link 3</a>
+    <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>
 </div>
 
 <!-- Page Content -->
@@ -55,8 +68,40 @@
         <p>Tu jakaś treść może motywacyjny mem</p>
     </div>
 
+
+
+<div>
+    <c:url var="department" value="AdminDepartmentServlet">
+        <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+    </c:url>
+    <c:url var="application" value="AdminApplicationServlet">
+        <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+    </c:url>
+    <c:url var="employee" value="AdminEmployeeServlet">
+        <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+    </c:url>
+    <c:url var="history" value="AdminHistoryServlet">
+        <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+    </c:url>
+
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a class="nav-link" href="${department}">Informacje o departamencie</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="${application}">Wnioski do rozpatrzenia</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="${employee}">Pracownicy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="${history}">Historia zwolnień</a>
+        </li>
+    </ul>
 </div>
 
+</div>
+<%--container koniec--%>
 
 
 </body>
