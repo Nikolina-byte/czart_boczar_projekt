@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="czart_boczar_projekt:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>czart_boczar_projekt</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="czart_boczar_projekt-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="czart_boczar_projekt:war exploded" />
+    </root>
+  </artifact>
+</component>

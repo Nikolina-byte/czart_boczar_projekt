@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin log panel</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="row form-group"></div>
+<div class="row form-group"></div>
+<div class="row form-group"></div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Admin</h1>
+
+
+    <form action="LoginServlet" method="post">
+      <div class="form-group">
+        <label for="Login">Login</label>
+        <input type="text" class="form-control" name="loginInput" placeholder="Wprowadź login">
+        <small id="emailHelp" class="form-text text-muted">Login powinien mieć długość 4 znaków.</small>
+      </div>
+      <div class="form-group">
+        <label for="Password">Hasło</label>
+        <input type="password" class="form-control" name="passwordInput" placeholder="Hasło">
+      </div>
+      <button type="submit" class="btn btn-primary">Dalej</button>
+    </form>
+
+  </div>
+</div>
+
+<div class="row form-group"></div>
+<div class="row form-group"></div>
+<div class="row form-group"></div>
+
+<div class="row">
+  <div class="container-fluid">
+
+    <div class="col-sm-9">
+      <a href="index.html" class="btn btn-lg btn-primary" role="button" aria-disabled="true">Wróć do strony głównej</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
