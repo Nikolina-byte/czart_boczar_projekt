@@ -93,58 +93,7 @@ public class DBUtilEmployee extends DBUtil{
         }
     }
 
-    // Dodaje użytkownika
-    public void addEmployee(Employee employee) throws Exception {
 
-        Connection conn = null;
-        PreparedStatement statement = null;
-
-        try {
-            DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy-M-dd");
-
-            conn = dbConnect();
-
-            String sql = "INSERT INTO employee(first_name, last_name, birth_date, `e-mail`, phone_number, `position`) " +
-                    "VALUES(?,?,?,?,?,?)";
-
-            statement = conn.prepareStatement(sql);
-            statement.setString(1, employee.getFirst_name());
-            statement.setString(2, employee.getLast_name());
-            statement.setString(3, dtf1.format(employee.getBirth()));
-            statement.setString(4, employee.getEmail());
-            statement.setString(5, employee.getPhone());
-            statement.setString(6, employee.getPosition());
-            statement.execute();
-        } finally {
-            close(conn, statement, null);
-        }
-    }
-
-    // Dodaje vacation_data
-    public void addVacationData(VacationData vacationData) throws Exception {
-
-        Connection conn = null;
-        PreparedStatement statement = null;
-
-        try {
-            DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy-M-dd");
-
-            conn = dbConnect();
-
-            String sql = "INSERT INTO vacation_data (worked_years, education, free_days, used_days, employee_id) " +
-                    "VALUES(?,?,?,?,?)";
-
-            statement = conn.prepareStatement(sql);
-            statement.setInt(1, vacationData.getWorkedYears());
-            statement.setString(2, String.valueOf(vacationData.getEducationType()));
-            statement.setInt(3, vacationData.getFreeDay());
-            statement.setInt(4, vacationData.getUsedDay());
-            statement.setInt(5, vacationData.getEmployee().getId());
-            statement.execute();
-        } finally {
-            close(conn, statement, null);
-        }
-    }
 
     // Modyfikuje vacation data
     public void updateVacationData(VacationData vacationData) throws Exception {

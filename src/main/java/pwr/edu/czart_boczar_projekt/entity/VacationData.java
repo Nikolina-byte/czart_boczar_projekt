@@ -14,15 +14,14 @@ public class VacationData {
     private Employee employee;
 
     //Start Constructor
-    public VacationData(int id, LocalDate startCompany, int workedYears, String educationType, Employee employee) {
-        this.id = id;
+    public VacationData(LocalDate startCompany, int workedYears, String educationType, Employee employee) {
         this.startCompany = startCompany;
-        this.dateMaxVacation = startCompany;
+        this.employee = employee;
+        this.dateMaxVacation = LocalDate.of(2010, 1,1);
         this.workedYears = workedYears;
         this.educationType = educationType;
         this.freeDay = calculateVacationDay();
         this.usedDay = 0;
-        this.employee = employee;
     }
 
     public VacationData(int id, LocalDate startCompany, LocalDate dateMaxVacation, int workedYears, String educationType,
@@ -55,6 +54,10 @@ public class VacationData {
 
     public void setDateMaxVacation(LocalDate dateMaxVacation) {
         this.dateMaxVacation = dateMaxVacation;
+    }
+
+    public LocalDate getDateMaxVacation() {
+        return dateMaxVacation;
     }
 
     public int getWorkedYears() {
@@ -104,13 +107,13 @@ public class VacationData {
         if(currentYear - employeeYear < 18){
             isHaveEighteen = true;
         }
-        return isHaveEighteen();
+        return isHaveEighteen;
     }
 
     private boolean isFirstYear(){
         boolean isFirstYear = false;
         int currentYear = LocalDate.now().getYear();
-        int employeeYear = getEmployee().getBirth().getYear();
+        int employeeYear = getStartCompany().getYear();
         if(currentYear == employeeYear){
             isFirstYear = true;
         }
@@ -124,7 +127,7 @@ public class VacationData {
         }else{
             if(getWorkedYears() + switchEducationToYears() + getCurrentWorkYear() < 10){
                 newVacationDays = 20;
-                LocalDate date = getDateMaxVacation();
+                LocalDate date = createDateMaxVacation();
                 setDateMaxVacation(date);
             }else{
                 newVacationDays = 26;
@@ -132,12 +135,12 @@ public class VacationData {
         }
         if(isFirstYear()){
             int month = getStartCompany().getMonth().getValue();
-            newVacationDays = Math.round((newVacationDays / 12) * (12-month));
+            newVacationDays = (int) Math.round((newVacationDays / 12.0) * (12-month));
         }
         return newVacationDays;
     }
 
-    private LocalDate getDateMaxVacation(){
+    private LocalDate createDateMaxVacation(){
         int years = getWorkedYears() + switchEducationToYears() + getWorkedYears();
         LocalDate today = LocalDate.now();
         Duration difference = Duration.between(getStartCompany().atStartOfDay(), today.atStartOfDay());
