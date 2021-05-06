@@ -5,6 +5,8 @@ import pwr.edu.czart_boczar_projekt.entity.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBUtilAdmin extends DBUtil{
     private static final String URL = "jdbc:mysql://localhost:3306/holidaydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=CET";
@@ -329,5 +331,82 @@ public class DBUtilAdmin extends DBUtil{
         } finally {
             close(conn, statement, null);
         }
+    }
+
+
+    public void updateBase(int employeeID) throws Exception {
+        updateApplication(employeeID);
+        updateVacationData(employeeID);
+    }
+
+    private void updateApplication(int empoyeeID) throws Exception {
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = dbConnect();
+
+            String sql = "UPDATE `application` SET `status`='zrealizowany' WHERE `status`='zaakceptowany' AND " +
+                    "`start_date`=curdate() AND employee_id=" + empoyeeID;
+
+
+            statement = conn.prepareStatement(sql);
+            statement.execute();
+        } finally {
+            close(conn, statement, null);
+        }
+    }
+
+    private void updateVacationData(int empoyeeID) throws Exception {
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = dbConnect();
+
+            String sql = " UPDATE `vacation_data` SET `free_days`=26 WHERE `date_max_vacation`=curdate() AND employee_id="+ empoyeeID;
+
+
+            statement = conn.prepareStatement(sql);
+            statement.execute();
+        } finally {
+            close(conn, statement, null);
+        }
+    }
+
+    public List<Employee> getEmployees() throws Exception {
+        List<Employee> employees = new ArrayList<>();
+
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            conn = dbConnect();
+
+            String sql = "SELECT * FROM employee";
+            statement = conn.createStatement();
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                // pobranie danych z rzedu
+                int id = resultSet.getInt("id");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String birth = resultSet.getString("birth_date");
+                String email = resultSet.getString("e-mail");
+                String phone= resultSet.getString("phone_number");
+                String position = resultSet.getString("position");
+                String status = resultSet.getString("status");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
+                // dodanie do listy nowego obiektu
+                employees.add(new Employee(id, firstName, lastName, LocalDate.parse(birth, formatter), email, phone, position, status));
+            }
+        } finally {
+            close(conn, statement, resultSet);
+        }
+        return employees;
     }
 }

@@ -44,10 +44,11 @@ public class EmployeeApplicationHistoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String managerID = request.getParameter("employeeID");
+        request.setAttribute("EMPLOYEE", managerID);
         List<ApplicationInformationView> applicationsZaaceptowane = null;
         try {
             String status = "zaakceptowany";
-            EmployeeInformationView employee = dbUtil.getEmployeeByID(Integer.parseInt(managerID));
+            EmployeeInformationView employee = dbUtil.getEmployeeViewByID(Integer.parseInt(managerID));
             applicationsZaaceptowane = dbUtil.getApplicationsByStatusAndEmployeeID(status, employee.getId());
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +59,7 @@ public class EmployeeApplicationHistoryServlet extends HttpServlet {
         List<ApplicationInformationView> applicationsZrealizowany = null;
         try {
             String status = "zrealizowany";
-            EmployeeInformationView employee = dbUtil.getEmployeeByID(Integer.parseInt(managerID));
+            EmployeeInformationView employee = dbUtil.getEmployeeViewByID(Integer.parseInt(managerID));
             applicationsZrealizowany = dbUtil.getApplicationsByStatusAndEmployeeID(status, employee.getId());
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,7 +70,7 @@ public class EmployeeApplicationHistoryServlet extends HttpServlet {
         List<ApplicationInformationView> applicationsOdrzucone = null;
         try {
             String status = "odrzucony";
-            EmployeeInformationView employee = dbUtil.getEmployeeByID(Integer.parseInt(managerID));
+            EmployeeInformationView employee = dbUtil.getEmployeeViewByID(Integer.parseInt(managerID));
             applicationsOdrzucone = dbUtil.getApplicationsByStatusAndEmployeeID(status, employee.getId());
         } catch (Exception e) {
             e.printStackTrace();

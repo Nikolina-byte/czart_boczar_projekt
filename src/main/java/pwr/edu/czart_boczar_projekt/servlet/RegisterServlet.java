@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {

@@ -5,13 +5,13 @@ import java.time.LocalDate;
 
 public class VacationData {
     private int id;
-    private LocalDate startCompany;
-    private LocalDate dateMaxVacation;
     private int workedYears;
     private String  educationType;
     private int freeDay;
     private int usedDay;
     private Employee employee;
+    private LocalDate startCompany;
+    private LocalDate dateMaxVacation;
 
     //Start Constructor
     public VacationData(LocalDate startCompany, int workedYears, String educationType, Employee employee) {
@@ -24,16 +24,15 @@ public class VacationData {
         this.usedDay = 0;
     }
 
-    public VacationData(int id, LocalDate startCompany, LocalDate dateMaxVacation, int workedYears, String educationType,
-                        int freeDay, int usedDay, Employee employee) {
-        this.id = id;
-        this.startCompany = startCompany;
-        this.dateMaxVacation = dateMaxVacation;
+    public VacationData(int workedYears, String educationType, int freeDay, int usedDay, Employee employee,
+                        LocalDate startCompany, LocalDate dateMaxVacation) {
         this.workedYears = workedYears;
         this.educationType = educationType;
         this.freeDay = freeDay;
         this.usedDay = usedDay;
         this.employee = employee;
+        this.startCompany = startCompany;
+        this.dateMaxVacation = dateMaxVacation;
     }
 
     public int getId() {
