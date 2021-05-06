@@ -76,7 +76,7 @@
             </thead>
             <tbody>
 
-            <c:forEach var="tmpCereal1" items="${ZLOZONE_APPLICATIONS_LIST}">
+            <c:forEach var="tmpCereal1" items="${APPLICATIONS_LIST}">
 
 <%--            <c:url var="updateLink" value="EmployeeApplicationServlet">--%>
 <%--                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
