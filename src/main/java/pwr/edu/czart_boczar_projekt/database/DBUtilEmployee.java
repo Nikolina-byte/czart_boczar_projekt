@@ -254,11 +254,44 @@ public class DBUtilEmployee extends DBUtil {
 
 
 
+    //Zwraca wniosek na podstawie ID wniosku
+    public Application getApplicationByID(String applicationID) throws Exception {
+        Application application = null;
 
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
 
-    //
+        try {
+            conn = dbConnect();
 
-    public List<ApplicationInformationView> getApplicationList(int employeeID) throws SQLException, ClassNotFoundException {
+            String sql = "SELECT * FROM application WHERE id = " + applicationID;
+            statement = conn.createStatement();
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                // pobranie danych z rzedu
+                int id = resultSet.getInt("id");
+                String leaveType = resultSet.getString("type_leave");
+                String startDay = resultSet.getString("start_date");
+                String endDay = resultSet.getString("end_date");
+                String status = resultSet.getString("status");
+                int employeeId = resultSet.getInt("employee_id");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
+
+                Employee employee = getEmployee(employeeId);
+                application = new Application(id, leaveType, LocalDate.parse(startDay, formatter),
+                        LocalDate.parse(endDay, formatter), status, employee);
+            }
+        } finally {
+            close(conn, statement, resultSet);
+        }
+        return application;
+    }
+
+    //zwraca listę wniosków dla danego pracownika
+    public List<ApplicationInformationView> getApplicationListByIDemployee(int employeeID) throws SQLException, ClassNotFoundException {
         List<ApplicationInformationView> applications = new ArrayList<>();
 
         Connection conn = null;
@@ -299,7 +332,7 @@ public class DBUtilEmployee extends DBUtil {
     }
 
 
-    public List<ApplicationInformationView> getApplicationsByStatus(int employeeID,String statusApplication) throws SQLException, ClassNotFoundException {
+    public List<ApplicationInformationView> getApplicationsByStatusAndEmployeeID(String statusApplication, int employeeID) throws SQLException, ClassNotFoundException {
         List<ApplicationInformationView> applications = new ArrayList<>();
 
         Connection conn = null;

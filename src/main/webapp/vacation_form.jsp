@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Manager Panel</title>
+    <title>Employee Vacation Form</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="end_date">Data rozpoczęcia urlopu</label>
+                    <label for="end_date">Data zakończenia urlopu</label>
                     <input type="date" class="form-control" name="end_date" id="end_date"  required>
                 </div>
 
