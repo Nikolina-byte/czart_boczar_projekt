@@ -25,9 +25,9 @@
 </nav>
 
 <html var="application" value="EmployeeApplicationServlet">
-=======
+
 <c:url var="applyApplication" value="EmployeeApplicationServlet">
->>>>>>> nikola
+
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
 <c:url var="vacation_form" value="EmployeeAddApplicationServlet">

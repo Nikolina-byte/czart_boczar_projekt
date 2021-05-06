@@ -56,16 +56,16 @@ public class EmployeeApplicationServlet extends HttpServlet {
             VacationData vacationData = dbUtil.getVacationDataByEmploye(Integer.parseInt(employeeID));
 
 
-            if(application.getLeaveType().equals("wypoczynkowy")){
-                int days = calcWeekDays(startDate, endDate)+1;
+            if (application.getLeaveType().equals("wypoczynkowy")) {
+                int days = calcWeekDays(startDate, endDate) + 1;
                 int freeDay = vacationData.getFreeDay();
-                if(freeDay-days>=0){
-                    vacationData.setFreeDay(freeDay-days);
+                if (freeDay - days >= 0) {
+                    vacationData.setFreeDay(freeDay - days);
                     vacationData.setUsedDay(days);
                     dbUtil.updateVacationData(vacationData);
 
 
-                }else {
+                } else {
                     System.out.println("Nie ma dni");
 //                    request.setAttribute("EMPLOYEE", employeeID);
 //                    RequestDispatcher dispatcher = request.getRequestDispatcher("/vacation_form_anserw.jsp");
@@ -91,7 +91,7 @@ public class EmployeeApplicationServlet extends HttpServlet {
         final DayOfWeek endW = end.getDayOfWeek();
 
         final long days = ChronoUnit.DAYS.between(start, end);
-        final long daysWithoutWeekends = days - 2 * ((days + startW.getValue())/7);
+        final long daysWithoutWeekends = days - 2 * ((days + startW.getValue()) / 7);
 
         //adjust for starting and ending on a Sunday:
         return (int) daysWithoutWeekends + (startW == DayOfWeek.SUNDAY ? 1 : 0) + (endW == DayOfWeek.SUNDAY ? 1 : 0);

@@ -49,8 +49,6 @@
         <button class="w3-button">Wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
             <a href="${application}" class="w3-bar-item w3-button">Do rozpatrzenia</a>
-            <a href=# class="w3-bar-item w3-button">Zrealizowane</a>
-            <a href="${accepted}" class="w3-bar-item w3-button">Zaakceptowane</a>
             <a href="${history}" class="w3-bar-item w3-button">Archiwum</a>
 
         </div>

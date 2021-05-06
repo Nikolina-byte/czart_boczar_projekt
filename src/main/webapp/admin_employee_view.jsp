@@ -36,6 +36,9 @@
 <c:url var="history" value="AdminHistoryServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
+<c:url var="accepted" value="AdminHistoryServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
 
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
@@ -45,26 +48,18 @@
         <button class="w3-button">Wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
             <a href="${application}" class="w3-bar-item w3-button">Do rozpatrzenia</a>
-            <a href=# class="w3-bar-item w3-button">Zrealizowane</a>
-            <a href=# class="w3-bar-item w3-button">Zaakceptowane</a>
             <a href="${history}" class="w3-bar-item w3-button">Archiwum</a>
 
         </div>
     </div>
     <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>
 </div>
+
+
+
 <%--content strony--%>
 <div style="margin-left:25%">
-
-
-
-
-    <%--    <img src="img_car.jpg" alt="Car" style="width:100%">--%>
-
     <div class="w3-container">
-        <p>Tu jakaś treść może motywacyjny mem</p>
-
-
         <h1><%= "Pracownicy projektu 1:" %>
         </h1>
         <table border>

@@ -10,6 +10,7 @@ public class Application {
     private String status;
     private Employee employee;
 
+
     public Application(int id, String leaveType, LocalDate startDate, LocalDate endDate, String status, Employee employee) {
         this.id = id;
         this.leaveType = leaveType;
