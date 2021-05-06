@@ -66,27 +66,18 @@ public class DBUtilEmployee extends DBUtil {
     }
 
     // Modyfikuje wniosek -> automatycznie do zatwierdzenia
-    public void updateApplication(Application application) throws Exception {
+    public void updateApplication(String empoyeeID) throws Exception {
         Connection conn = null;
         PreparedStatement statement = null;
 
         try {
             conn = dbConnect();
-            DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy-M-dd");
 
-            String sql = "UPDATE application SET type_leave=?, start_date=?," +
-                    "end_date=?, status=?, employee_id=? " +
-                    "WHERE id =?";
+            String sql = "UPDATE `application` SET `status`='zrealizowany' WHERE `status`='zaakceptowany' AND " +
+                    "`start_date`=curdate() AND employee_id=" + empoyeeID;
 
 
             statement = conn.prepareStatement(sql);
-            statement.setString(1, String.valueOf(application.getLeaveType()));
-            statement.setString(2, dtf1.format(application.getStartDate()));
-            statement.setString(3, dtf1.format(application.getEndDate()));
-            statement.setString(4, String.valueOf(application.getStatus()));
-            statement.setInt(5, application.getEmployee().getId());
-            statement.setInt(6, application.getId());
-
             statement.execute();
         } finally {
             close(conn, statement, null);
