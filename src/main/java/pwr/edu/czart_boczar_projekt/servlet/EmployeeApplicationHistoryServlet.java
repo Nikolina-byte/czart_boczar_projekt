@@ -43,47 +43,29 @@ public class EmployeeApplicationHistoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String managerID = request.getParameter("employeeID");
-        request.setAttribute("EMPLOYEE", managerID);
-        List<ApplicationInformationView> applicationsZaaceptowane = null;
-        try {
-            String status = "zaakceptowany";
-            EmployeeInformationView employee = dbUtil.getEmployeeViewByID(Integer.parseInt(managerID));
-            applicationsZaaceptowane = dbUtil.getApplicationsByStatusAndEmployeeID(status, employee.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        request.setAttribute("APPLICATIONS_LIST", applicationsZaaceptowane);
+        String employeeID = request.getParameter("employeeID");
 
-        // Wnioski zrealizowane
         List<ApplicationInformationView> applicationsZrealizowany = null;
         try {
             String status = "zrealizowany";
-            EmployeeInformationView employee = dbUtil.getEmployeeViewByID(Integer.parseInt(managerID));
-            applicationsZrealizowany = dbUtil.getApplicationsByStatusAndEmployeeID(status, employee.getId());
+            Employee employee = dbUtil.getEmployeeByID(Integer.parseInt(employeeID));
+            applicationsZrealizowany = dbUtil.getApplicationByStatusAndManager(status, employee.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
         request.setAttribute("ZREALIZOWANE_APPLICATIONS_LIST", applicationsZrealizowany);
 
-        // Wnioski zrealizowane
         List<ApplicationInformationView> applicationsOdrzucone = null;
         try {
             String status = "odrzucony";
-            EmployeeInformationView employee = dbUtil.getEmployeeViewByID(Integer.parseInt(managerID));
-            applicationsOdrzucone = dbUtil.getApplicationsByStatusAndEmployeeID(status, employee.getId());
+            Employee employee = dbUtil.getEmployeeByID(Integer.parseInt(employeeID));
+            applicationsOdrzucone = dbUtil.getApplicationByStatusAndManager(status, employee.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
         request.setAttribute("ODRZUCONE_APPLICATIONS_LIST", applicationsOdrzucone);
-        request.setAttribute("EMPLOYEE", managerID);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/employee_application_view.jsp");
+        request.setAttribute("EMPLOYEE", employeeID);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/employee_history_application.jsp");
         dispatcher.forward(request, response);
-    }
-
-    private void modificationApplication(HttpServletRequest request, HttpServletResponse response){
-        String id = request.getParameter("applicationID");
-//        dbUtil.deleteApplication(id);
     }
 }

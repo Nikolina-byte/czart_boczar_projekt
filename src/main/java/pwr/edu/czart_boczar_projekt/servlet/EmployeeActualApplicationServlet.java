@@ -46,6 +46,16 @@ public class EmployeeActualApplicationServlet extends HttpServlet {
 
         String employeeID = request.getParameter("employeeID");
 
+        List<ApplicationInformationView> applicationsZlozone = null;
+        try {
+            String status = "złożony";
+            Employee employee = dbUtil.getEmployeeByID(Integer.parseInt(employeeID));
+            applicationsZlozone = dbUtil.getApplicationByStatusAndManager(status, employee.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        request.setAttribute("ZLOZONE_APPLICATIONS_LIST", applicationsZlozone);
+
         List<ApplicationInformationView> applicationsZaaceptowane = null;
         try {
             String status = "zaakceptowany";
@@ -55,7 +65,7 @@ public class EmployeeActualApplicationServlet extends HttpServlet {
             e.printStackTrace();
         }
         request.setAttribute("APPLICATIONS_LIST", applicationsZaaceptowane);
-
+        request.setAttribute("EMPLOYEE", employeeID);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/employee_application_view.jsp");
         dispatcher.forward(request, response);
     }

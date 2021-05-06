@@ -53,7 +53,6 @@
             <a href=# class="w3-bar-item w3-button">Zrealizowane</a>
             <a href="${accepted}" class="w3-bar-item w3-button">Zaakceptowane</a>
             <a href="${history}" class="w3-bar-item w3-button">Archiwum</a>
-
         </div>
     </div>
     <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>

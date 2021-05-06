@@ -25,20 +25,29 @@
 </nav>
 
 
-<c:url var="application" value="EmployeeApplicationServlet">
+<c:url var="applyApplication" value="EmployeeApplicationServlet">
+    >>>>>>> nikola
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
-<%--<c:url var="application" value="AdminApplicationServlet">--%>
-<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--</c:url>--%>
-<%--<c:url var="employee" value="AdminEmployeeServlet">--%>
-<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--</c:url>--%>
-<%--<c:url var="history" value="AdminHistoryServlet">--%>
-<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--</c:url>--%>
+<c:url var="vacation_form" value="EmployeeAddApplicationServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
 
-<%--sidebar--%>
+<c:url var="application_view" value="EmployeeApplicationServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
+
+<c:url var="application" value="EmployeeActualApplicationServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
+
+<c:url var="history" value="EmployeeApplicationHistoryServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
+
+
+<!-- Sidebar -->
+
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
     <h3 class="w3-bar-item">Menu Pracownika</h3>
     <%--    <a href="${department}" class="w3-bar-item w3-button">Informacje o dziale</a>--%>
@@ -46,20 +55,14 @@
         <button class="w3-button">Twoje wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
             <a href="${vacation_form}" class="w3-bar-item w3-button">Złóż wniosek</a>
-            <a href=# class="w3-bar-item w3-button">Archiwum</a>
+            <a href="${application}" class="w3-bar-item w3-button">Aktualne wnioski</a>
+            <a href="${history}" class="w3-bar-item w3-button">Archiwum</a>
         </div>
     </div>
 </div>
 
 <!-- Page Content -->
 <div style="margin-left:25%">
-
-<%--    <div class="w3-container w3-teal">--%>
-<%--        <h1>Witaj ${EMPLOYEE}!</h1>--%>
-<%--    </div>--%>
-
-    <%--    <img src="img_car.jpg" alt="Car" style="width:100%">--%>
-
     <div class="w3-container">
         <h1><%= "Wnioski złożone: " %>
         </h1>
@@ -76,20 +79,7 @@
             </thead>
             <tbody>
 
-            <c:forEach var="tmpCereal1" items="${APPLICATIONS_LIST}">
-
-<%--            <c:url var="updateLink" value="EmployeeApplicationServlet">--%>
-<%--                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--                <c:param name="command" value="UPDATE"></c:param>--%>
-<%--                <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>--%>
-<%--            </c:url>--%>
-
-<%--            <c:url var="rejctedLink" value="EmployeeApplicationServlet">--%>
-<%--                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--                <c:param name="command" value="DELETE"></c:param>--%>
-<%--                <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>--%>
-<%--            </c:url>--%>
-
+            <c:forEach var="tmpCereal1" items="${ZLOZONE_APPLICATIONS_LIST}">
 
             <tr>
                 <td>${tmpCereal1.getId()}</td>
@@ -98,20 +88,41 @@
                 <td>${tmpCereal1.getEndDay()}</td>
                 <td>${tmpCereal1.getNumberDay()}</td>
                 <td>${tmpCereal1.getStatusApplicationType()}</td>
-             <%--   <td><a href="${updateLink}"
-                       onclick="if(!(confirm('Czy na pewno chcesz zmodyfikować ten wniosek?'))) return false">
-                    <button type="button" class="btn btn-success">Modyfikuj</button>
-                </a>
-                    <a href="${rejctedLink}"
-                       onclick="if(!(confirm('Czy na pewno chcesz usunąć ten wniosek?'))) return false">
-                        <button type="button" class="btn btn-danger">Odrzuć</button>
-                    </a></td>--%>
             </tr>
 
             </c:forEach>
         </table>
 
+        <h1><%= "Wnioski zaakceptowane: " %>
+        </h1>
+        <table border>
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Rodzaj urlopu</th>
+                <th scope="col">Data rozpoczęcia urlopu</th>
+                <th scope="col">Data końca urlopu</th>
+                <th scope="col">Liczba dni</th>
+                <th scope="col">Status wniosku</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <c:forEach var="tmpCereal1" items="${APPLICATIONS_LIST}">
+
+            <tr>
+                <td>${tmpCereal1.getId()}</td>
+                <td>${tmpCereal1.getLeaveType()}</td>
+                <td>${tmpCereal1.getStartDay()}</td>
+                <td>${tmpCereal1.getEndDay()}</td>
+                <td>${tmpCereal1.getNumberDay()}</td>
+                <td>${tmpCereal1.getStatusApplicationType()}</td>
+            </tr>
+
+            </c:forEach>
+        </table>
     </div>
+
     <%--    koniec container--%>
 </div>
 <%--koniec stylu--%>
