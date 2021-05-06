@@ -50,7 +50,7 @@ public class DBUtilEmployee extends DBUtil {
             conn = dbConnect();
 
             String sql = "INSERT INTO application(type_leave, start_date, end_date, status, employee_id) " +
-                    "VALUES(?,?,?,?,?,?)";
+                    "VALUES(?,?,?,?,?)";
 
             statement = conn.prepareStatement(sql);
             statement.setString(1, String.valueOf(application.getLeaveType()));
@@ -58,8 +58,8 @@ public class DBUtilEmployee extends DBUtil {
             statement.setString(3, dtf1.format(application.getEndDate()));
             statement.setString(4, String.valueOf(application.getStatus()));
             statement.setInt(5, application.getEmployee().getId());
-
             statement.execute();
+
         } finally {
             close(conn, statement, null);
         }
@@ -93,8 +93,6 @@ public class DBUtilEmployee extends DBUtil {
         }
     }
 
-
-
     // Modyfikuje vacation data
     public void updateVacationData(VacationData vacationData) throws Exception {
         Connection conn = null;
@@ -105,17 +103,14 @@ public class DBUtilEmployee extends DBUtil {
             DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy-M-dd");
 
             // zapytanie UPDATE
-            String sql = "UPDATE vacation_data SET worked_years=?, education=?," +
-                    "free_days=?, used_days=?, employee_id=? " +
-                    "WHERE id =?";
-
+            String sql = "UPDATE `vacation_data` SET " +
+                    "`free_days`=" + vacationData.getFreeDay() +
+                    ", `used_days`=" + vacationData.getUsedDay() +
+                    " WHERE `employee_id`="+vacationData.getEmployee().getId() +";";
+            System.out.println(vacationData.getFreeDay());
+            System.out.println(vacationData.getUsedDay());
+            System.out.println(vacationData.getEmployee().getId());
             statement = conn.prepareStatement(sql);
-            statement.setInt(1, vacationData.getWorkedYears());
-            statement.setString(2, String.valueOf(vacationData.getEducationType()));
-            statement.setInt(3, vacationData.getFreeDay());
-            statement.setInt(4, vacationData.getUsedDay());
-            statement.setInt(5, vacationData.getEmployee().getId());
-            statement.setInt(6, vacationData.getId());
 
             statement.execute();
         } finally {
@@ -123,8 +118,109 @@ public class DBUtilEmployee extends DBUtil {
         }
     }
 
+//    // Zwraca pracownika po ID
+//    public Employee getVacationByEverything(VacationData vacation) throws Exception {
+//        Connection conn = null;
+//        Statement statement = null;
+//        ResultSet resultSet = null;
+//
+//        try {
+//            conn = dbConnect();
+//
+//            String sql = "SELECT * FROM vacation_data WHERE " +
+//                    "worked_years ='" + vacation.getWorkedYears() +
+//                    "' AND education='" + vacation.getEducationType() +
+//                    "' AND free_days='"+ vacation.getFreeDay() +
+//                    "' AND used_days='"+ vacation.getUsedDay() +
+//                    "' AND employee_id='"+ vacation.getEmployee().getId() +
+//                    "' AND start_company='"+ vacation.getStartCompany() +
+//                    "' AND date_max_vacation='"+ vacation.getDateMaxVacation() +
+//                    "';";
+//            statement = conn.createStatement();
+//
+//            resultSet = statement.executeQuery(sql);
+//
+//            while (resultSet.next()) {
+//                int workedYears = resultSet.getInt("worked_years");
+//                String educationType = resultSet.getString("education");
+//                int freeDays = resultSet.getInt("free_days");
+//                int usedDays = resultSet.getInt("used_days");
+//                int employeeId = resultSet.getInt("employee_id");
+//                String startCompany = resultSet.getString("start_company");
+//                String dateMaxVacation = resultSet.getString("date_max_vacation");
+//
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
+//                // dodanie do listy nowego obiektu
+//
+//                Employee employeeByID = getEmployeeByID(employeeId);
+//                if(dateMaxVacation==null){
+//                    dateMaxVacation = "2010-01-01";
+//                }
+//
+//                vacationData = new VacationData(workedYears, educationType, freeDays, usedDays, employeeByID,
+//                        LocalDate.parse(startCompany, formatter), LocalDate.parse(dateMaxVacation, formatter));
+//
+//
+//                while (resultSet.next()) {
+//                // pobranie danych z rzedu
+//                int id = resultSet.getInt("id");
+//                String firstName = resultSet.getString("first_name");
+//                String lastName = resultSet.getString("last_name");
+//                String birth = resultSet.getString("birth_date");
+//                String email = resultSet.getString("e-mail");
+//                String phone= resultSet.getString("phone_number");
+//                String position = resultSet.getString("position");
+//                String status = resultSet.getString("status");
+//
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
+//                // dodanie do listy nowego obiektu
+//                employee = new Employee(id, firstName, lastName, LocalDate.parse(birth, formatter), email, phone, position, status);
+//            }
+//        } finally {
+//            close(conn, statement, resultSet);
+//        }
+//        return employee;
+//    }
+
     // Zwraca pracownika po ID
-    public EmployeeInformationView getEmployeeByID(int employeeID) throws Exception {
+    public Employee getEmployeeByID(int employeeID) throws Exception {
+        Employee employee = null;
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            conn = dbConnect();
+
+            String sql = "SELECT * FROM employee WHERE id = " + employeeID;
+            statement = conn.createStatement();
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                // pobranie danych z rzedu
+                int id = resultSet.getInt("id");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String birth = resultSet.getString("birth_date");
+                String email = resultSet.getString("e-mail");
+                String phone= resultSet.getString("phone_number");
+                String position = resultSet.getString("position");
+                String status = resultSet.getString("status");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
+                // dodanie do listy nowego obiektu
+                employee = new Employee(id, firstName, lastName, LocalDate.parse(birth, formatter), email, phone, position, status);
+            }
+        } finally {
+            close(conn, statement, resultSet);
+        }
+        return employee;
+    }
+
+
+    // Zwraca pracownika po ID
+    public EmployeeInformationView getEmployeeViewByID(int employeeID) throws Exception {
         EmployeeInformationView employee = null;
         Connection conn = null;
         Statement statement = null;
@@ -144,7 +240,7 @@ public class DBUtilEmployee extends DBUtil {
                 String name = resultSet.getString("Name");
                 String birth = resultSet.getString("Birth");
                 String email = resultSet.getString("E-mail");
-                String phone = resultSet.getString("Phone");
+                String phone= resultSet.getString("Phone");
                 String department = resultSet.getString("Department");
                 String projects = resultSet.getString("Projects");
                 String manager = resultSet.getString("Manager");
@@ -159,9 +255,9 @@ public class DBUtilEmployee extends DBUtil {
         return employee;
     }
 
-    public Employee getEmployee(int employeeID) throws Exception {
-
-        Employee e = null;
+    // Zwraca pracownika po ID
+    public VacationData getVacationDataByEmploye(int employeeID) throws Exception {
+        VacationData vacationData = null;
         Connection conn = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -169,33 +265,35 @@ public class DBUtilEmployee extends DBUtil {
         try {
             conn = dbConnect();
 
-            String sql = "SELECT * FROM employee WHERE id = " + employeeID;
+            String sql = "SELECT * FROM vacation_data WHERE employee_id = " + employeeID;
             statement = conn.createStatement();
 
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                // pobranie danych z rzedu
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("first_name");
-                String surname = resultSet.getString("last_name");
-                String birth = resultSet.getString("birth_date");
-                String email = resultSet.getString("e-mail");
-                String phone = resultSet.getString("phone_number");
-                String position = resultSet.getString("position");
-                String status = resultSet.getString("status");
+                int workedYears = resultSet.getInt("worked_years");
+                String educationType = resultSet.getString("education");
+                int freeDays = resultSet.getInt("free_days");
+                int usedDays = resultSet.getInt("used_days");
+                int employeeId = resultSet.getInt("employee_id");
+                String startCompany = resultSet.getString("start_company");
+                String dateMaxVacation = resultSet.getString("date_max_vacation");
 
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-dd");
-                LocalDate birthDate = LocalDate.parse(birth, dtf);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
+                // dodanie do listy nowego obiektu
 
-                e = new Employee(name, surname, birthDate, email, phone, position, status);
+                Employee employeeByID = getEmployeeByID(employeeId);
+                if(dateMaxVacation==null){
+                    dateMaxVacation = "2010-01-01";
+                }
 
+                vacationData = new VacationData(workedYears, educationType, freeDays, usedDays, employeeByID,
+                        LocalDate.parse(startCompany, formatter), LocalDate.parse(dateMaxVacation, formatter));
             }
         } finally {
             close(conn, statement, resultSet);
         }
-
-        return e;
+        return vacationData;
     }
 
 
@@ -229,7 +327,7 @@ public class DBUtilEmployee extends DBUtil {
                 int employeeId = resultSet.getInt("employee_id");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
 
-                Employee employee = getEmployee(employeeId);
+                Employee employee = getEmployeeByID(employeeId);
                 application = new Application(id, leaveType, LocalDate.parse(startDay, formatter),
                         LocalDate.parse(endDay, formatter), status, employee);
             }

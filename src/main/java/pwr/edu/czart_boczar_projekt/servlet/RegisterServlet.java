@@ -65,6 +65,8 @@ public class RegisterServlet extends HttpServlet {
 
             if(loginByEmployee!= null){
                 System.out.println("Login pracownika jest zajety");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/register_form.html");
+                dispatcher.forward(request, response);
             }
 
             insertEmployee = dbUtil.addEmployee(employee);

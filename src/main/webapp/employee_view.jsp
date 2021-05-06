@@ -25,27 +25,32 @@
 </nav>
 
 
-<c:url var="department" value="EmployeeApplicationServlet">
+<c:url var="applyApplication" value="EmployeeApplicationServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
+<c:url var="vacation_form" value="EmployeeAddApplicationServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
+<%--<c:url var="employee" value="Emplo">--%>
+<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
+<%--</c:url>--%>
 <%--<c:url var="application" value="AdminApplicationServlet">--%>
 <%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
 <%--</c:url>--%>
-<%--<c:url var="employee" value="AdminEmployeeServlet">--%>
-<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--</c:url>--%>
+
 <%--<c:url var="history" value="AdminHistoryServlet">--%>
 <%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
 <%--</c:url>--%>
 
 <!-- Sidebar -->
+
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
     <h3 class="w3-bar-item">Menu Pracownika</h3>
 <%--    <a href="${department}" class="w3-bar-item w3-button">Informacje o dziale</a>--%>
     <div class="w3-dropdown-hover">
         <button class="w3-button">Twoje wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
-            <a href="vacation_form.jsp" class="w3-bar-item w3-button">Złóż wniosek</a>
+            <a href="${vacation_form}" class="w3-bar-item w3-button">Złóż wniosek</a>
             <a href=# class="w3-bar-item w3-button">Moje wnioski</a>
             <a href=# class="w3-bar-item w3-button">Archiwum</a>
         </div>

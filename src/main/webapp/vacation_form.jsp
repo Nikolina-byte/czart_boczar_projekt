@@ -39,6 +39,10 @@
 <%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
 <%--</c:url>--%>
 
+<c:url var="vacation_form" value="vacation_form.jsp">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
+
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
     <h3 class="w3-bar-item">Menu Pracownika</h3>
@@ -46,7 +50,7 @@
     <div class="w3-dropdown-hover">
         <button class="w3-button">Twoje wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
-            <a href="vacation_form.jsp" class="w3-bar-item w3-button">Złóż wniosek</a>
+            <a href="vacation_form" class="w3-bar-item w3-button">Złóż wniosek</a>
             <a href=# class="w3-bar-item w3-button">Moje wnioski</a>
             <a href=# class="w3-bar-item w3-button">Archiwum</a>
         </div>
@@ -54,17 +58,32 @@
     <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>
 </div>
 <!-- Page Content -->
+
+<c:url var="applyApplication" value="EmployeeApplicationServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
+
 <div style="margin-left:25%">
+
+    <div class="w3-container w3-teal">
+        <h1>Witaj ${EMPLOYEE}!</h1>
+        <h1>Witaj NULL ? !</h1>
+    </div>
 
 
     <div class="w3-container">
 
 
         <h1>Złóż wniosek o urlop</h1>
-        <form action="EmployeeApplicationServlet" method="get">
+        <form action="${applyApplication}" method="get">
+
             <fieldset>
 
                 <!--                String leaveType, LocalDate startDate, LocalDate endDate, String status, Employee employee-->
+                <div class="form-group">
+                        <label for="employee">ID wnioskodawcy:</label>
+                        <input type="text" class="form-control" name="employee" id="employee" value=${EMPLOYEE} readonly="">
+                </div>
 
                 <div class="form-group">
                     <label for="start_date">Data rozpoczęcia urlopu</label>

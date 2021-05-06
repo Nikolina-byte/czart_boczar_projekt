@@ -2,10 +2,7 @@ package pwr.edu.czart_boczar_projekt.servlet;
 
 
 import pwr.edu.czart_boczar_projekt.database.DBUtilEmployee;
-import pwr.edu.czart_boczar_projekt.entity.Application;
-import pwr.edu.czart_boczar_projekt.entity.ApplicationInformationView;
-import pwr.edu.czart_boczar_projekt.entity.Employee;
-import pwr.edu.czart_boczar_projekt.entity.EmployeeInformationView;
+import pwr.edu.czart_boczar_projekt.entity.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -15,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @WebServlet("/EmployeeApplicationServlet")
@@ -33,117 +32,56 @@ public class EmployeeApplicationServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
         response.setContentType("text/html");
 
-        String managerID = request.getParameter("employeeID");
-        // Wnioski złożone
-        List<ApplicationInformationView> applicationsZlozone = null;
-        try {
-            String status = "złożony";
-            EmployeeInformationView employee = dbUtil.getEmployeeByID(Integer.parseInt(managerID));
-            applicationsZlozone = dbUtil.getApplicationsByStatusAndEmployeeID(status,employee.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        request.setAttribute("ZLOZONE_APPLICATIONS_LIST", applicationsZlozone);
-        request.setAttribute("EMPLOYEE", managerID);
+        String employeeID = request.getParameter("employee");
 
-        try {
-            String command = request.getParameter("command");
-
-            if (command == null)
-                command = "LIST";
-
-            switch (command) {
-                case "LIST":
-                    listApplication(request, response);
-                    break;
-
-                case "UPDATE":
-                    changeStatusUpdated(request, response);
-                    break;
-
-                case "DELETE":
-                    changeStatusRejected(request, response);
-                    break;
-
-                default:
-                    listApplication(request, response);
-            }
-
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
-
-    }
-
-    private void changeStatusUpdated(HttpServletRequest request, HttpServletResponse response) {
-    }
-
-    private void changeStatusRejected(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String id = request.getParameter("applicationID");
-        Application application = dbUtil.getApplicationByID(id);
-        Application applicationMap = new Application(application, "usunięty");
-        dbUtil.updateApplication(applicationMap);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/employee_application_view.jsp");
-
-        dispatcher.forward(request, response);
-    }
-
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-        // odczytanie danych z formularza
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-dd");
         LocalDate startDate = LocalDate.parse(request.getParameter("start_date"), dtf);
         LocalDate endDate = LocalDate.parse(request.getParameter("end_date"), dtf);
         String leaveType = request.getParameter("vacation_type");
-        String managerID = request.getParameter("employeeID");
         String status = "złożony";
-        List<ApplicationInformationView> applicationsZlozone = null;
+
+        Employee employee = null;
         try {
-//            EmployeeInformationView employee = dbUtil.getEmployeeByID(Integer.parseInt(managerID));
-            Employee employee = dbUtil.getEmployee(Integer.parseInt(managerID));
-//            int id, String leaveType, LocalDate startDate, LocalDate endDate, String status, Employee employee
-            Application application = new Application(1, leaveType, startDate, endDate, status, employee);
-            applicationsZlozone = dbUtil.getApplicationsByStatusAndEmployeeID(status,employee.getId());
+            employee = dbUtil.getEmployeeByID(Integer.parseInt(employeeID));
+
+            Application application = new Application(leaveType, startDate, endDate, status, employee);
             dbUtil.addApplication(application);
-
+            VacationData vacationData = dbUtil.getVacationDataByEmploye(Integer.parseInt(employeeID));
+            if(application.getLeaveType().equals("wypoczynkowy")){
+                int days = calcWeekDays(startDate, endDate)+1;
+                int freeDay = vacationData.getFreeDay();
+                if(freeDay-days>=0){
+                    vacationData.setFreeDay(freeDay-days);
+                    vacationData.setUsedDay(days);
+                    dbUtil.updateVacationData(vacationData);
+                }else {
+                    System.out.println("Nie ma dni");
+//                    request.setAttribute("EMPLOYEE", employeeID);
+//                    RequestDispatcher dispatcher = request.getRequestDispatcher("/vacation_form_anserw.jsp");
+//                    dispatcher.forward(request, response);
+                }
+            };
         } catch (Exception e) {
             e.printStackTrace();
         }
-        request.setAttribute("ZLOZONE_APPLICATIONS_LIST", applicationsZlozone);
-        request.setAttribute("EMPLOYEE", managerID);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/employee_application_view.jsp");
-
-        dispatcher.forward(request, response);
-
-
-    }
-
-
-    private void listApplication(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String managerID = request.getParameter("employeeID");
-        List<ApplicationInformationView> applicationsZlozone = null;
-        try {
-            String status = "złożony";
-            EmployeeInformationView employee = dbUtil.getEmployeeByID(Integer.parseInt(managerID));
-            applicationsZlozone = dbUtil.getApplicationsByStatusAndEmployeeID(status,employee.getId());
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        request.setAttribute("ZLOZONE_APPLICATIONS_LIST", applicationsZlozone);
-        request.setAttribute("EMPLOYEE", managerID);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/employee_application_view.jsp");
+        request.setAttribute("EMPLOYEE", employeeID);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/vacation_form_anserw.jsp");
         dispatcher.forward(request, response);
     }
-    
+
+    private static int calcWeekDays(final LocalDate start, final LocalDate end) {
+        final DayOfWeek startW = start.getDayOfWeek();
+        final DayOfWeek endW = end.getDayOfWeek();
+
+        final long days = ChronoUnit.DAYS.between(start, end);
+        final long daysWithoutWeekends = days - 2 * ((days + startW.getValue())/7);
+
+        //adjust for starting and ending on a Sunday:
+        return (int) daysWithoutWeekends + (startW == DayOfWeek.SUNDAY ? 1 : 0) + (endW == DayOfWeek.SUNDAY ? 1 : 0);
+    }
 }

@@ -19,6 +19,14 @@ public class Application {
         this.employee = employee;
     }
 
+    public Application(String leaveType, LocalDate startDate, LocalDate endDate, String status, Employee employee) {
+        this.leaveType = leaveType;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.employee = employee;
+    }
+
     public Application(Application application, String status) {
         this.id = application.id;
         this.leaveType = application.leaveType;
