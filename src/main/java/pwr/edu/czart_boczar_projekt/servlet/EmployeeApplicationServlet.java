@@ -45,6 +45,8 @@ public class EmployeeApplicationServlet extends HttpServlet {
         String leaveType = request.getParameter("vacation_type");
         String status = "złożony";
 
+        List<ApplicationInformationView> applicationsZlozone = null;
+
         Employee employee = null;
         try {
             employee = dbUtil.getEmployeeByID(Integer.parseInt(employeeID));
@@ -52,6 +54,8 @@ public class EmployeeApplicationServlet extends HttpServlet {
             Application application = new Application(leaveType, startDate, endDate, status, employee);
             dbUtil.addApplication(application);
             VacationData vacationData = dbUtil.getVacationDataByEmploye(Integer.parseInt(employeeID));
+
+
             if(application.getLeaveType().equals("wypoczynkowy")){
                 int days = calcWeekDays(startDate, endDate)+1;
                 int freeDay = vacationData.getFreeDay();
@@ -59,17 +63,25 @@ public class EmployeeApplicationServlet extends HttpServlet {
                     vacationData.setFreeDay(freeDay-days);
                     vacationData.setUsedDay(days);
                     dbUtil.updateVacationData(vacationData);
+
+
                 }else {
                     System.out.println("Nie ma dni");
 //                    request.setAttribute("EMPLOYEE", employeeID);
 //                    RequestDispatcher dispatcher = request.getRequestDispatcher("/vacation_form_anserw.jsp");
 //                    dispatcher.forward(request, response);
                 }
-            };
+            }
+
+            applicationsZlozone = dbUtil.getApplicationsByStatusAndEmployeeID(status, employee.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        request.setAttribute("ZLOZONE_APPLICATIONS_LIST", applicationsZlozone);
         request.setAttribute("EMPLOYEE", employeeID);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/vacation_form_anserw.jsp");
         dispatcher.forward(request, response);
     }
