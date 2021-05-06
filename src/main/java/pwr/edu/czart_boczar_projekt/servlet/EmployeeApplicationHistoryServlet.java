@@ -82,4 +82,8 @@ public class EmployeeApplicationHistoryServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void modificationApplication(HttpServletRequest request, HttpServletResponse response){
+        String id = request.getParameter("applicationID");
+//        dbUtil.deleteApplication(id);
+    }
 }
