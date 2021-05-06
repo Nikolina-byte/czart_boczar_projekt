@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class ApplicationInformationView {
     private int id;
+    private int idEmployee;
     private String leaveType;
     private LocalDate startDay;
     private LocalDate endDay;
@@ -12,6 +13,7 @@ public class ApplicationInformationView {
     private String employeeName;
     private String departmentName;
     private String projects;
+
 
     public ApplicationInformationView(int id, String leaveType, LocalDate startDay, LocalDate endDay, int numberDay,
                                       String statusApplicationType, String employeeName, String departmentName, String projects) {
@@ -28,6 +30,21 @@ public class ApplicationInformationView {
 
     public ApplicationInformationView(String leaveType, LocalDate startDay, LocalDate endDay, int numberDay,
                                       String statusApplicationType, String employeeName, String departmentName, String projects) {
+        this.leaveType = leaveType;
+        this.startDay = startDay;
+        this.endDay = endDay;
+        this.numberDay = numberDay;
+        this.statusApplicationType = statusApplicationType;
+        this.employeeName = employeeName;
+        this.departmentName = departmentName;
+        this.projects = projects;
+    }
+    // dodac nowy konstuktor z id klienta
+
+
+    public ApplicationInformationView(int id, int idEmployee, String leaveType, LocalDate startDay, LocalDate endDay, int numberDay, String statusApplicationType, String employeeName, String departmentName, String projects) {
+        this.id = id;
+        this.idEmployee = idEmployee;
         this.leaveType = leaveType;
         this.startDay = startDay;
         this.endDay = endDay;
