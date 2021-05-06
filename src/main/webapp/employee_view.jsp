@@ -25,7 +25,7 @@
 </nav>
 
 
-<c:url var="department" value="EmployeeApplicationServlet">
+<c:url var="application" value="EmployeeApplicationServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
 <%--<c:url var="application" value="AdminApplicationServlet">--%>
@@ -46,11 +46,11 @@
         <button class="w3-button">Twoje wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
             <a href="vacation_form.jsp" class="w3-bar-item w3-button">Złóż wniosek</a>
-            <a href=# class="w3-bar-item w3-button">Moje wnioski</a>
+            <a href="${application}" class="w3-bar-item w3-button">Moje wnioski</a>
             <a href=# class="w3-bar-item w3-button">Archiwum</a>
         </div>
     </div>
-    <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>
+<%--    <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>--%>
 </div>
 
 <!-- Page Content -->
