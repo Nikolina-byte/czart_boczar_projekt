@@ -141,7 +141,6 @@ public class EmployeeActualApplicationServlet extends HttpServlet {
             dbUtil.deleteApplication(Integer.parseInt(id));
         }
         listApplication(request, response);
-
     }
 
     private void changeApplication(HttpServletRequest request, HttpServletResponse response) {
