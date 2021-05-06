@@ -109,69 +109,46 @@ public class DBUtilEmployee extends DBUtil {
         }
     }
 
-//    // Zwraca pracownika po ID
-//    public Employee getVacationByEverything(VacationData vacation) throws Exception {
-//        Connection conn = null;
-//        Statement statement = null;
-//        ResultSet resultSet = null;
-//
-//        try {
-//            conn = dbConnect();
-//
-//            String sql = "SELECT * FROM vacation_data WHERE " +
-//                    "worked_years ='" + vacation.getWorkedYears() +
-//                    "' AND education='" + vacation.getEducationType() +
-//                    "' AND free_days='"+ vacation.getFreeDay() +
-//                    "' AND used_days='"+ vacation.getUsedDay() +
-//                    "' AND employee_id='"+ vacation.getEmployee().getId() +
-//                    "' AND start_company='"+ vacation.getStartCompany() +
-//                    "' AND date_max_vacation='"+ vacation.getDateMaxVacation() +
-//                    "';";
-//            statement = conn.createStatement();
-//
-//            resultSet = statement.executeQuery(sql);
-//
-//            while (resultSet.next()) {
-//                int workedYears = resultSet.getInt("worked_years");
-//                String educationType = resultSet.getString("education");
-//                int freeDays = resultSet.getInt("free_days");
-//                int usedDays = resultSet.getInt("used_days");
-//                int employeeId = resultSet.getInt("employee_id");
-//                String startCompany = resultSet.getString("start_company");
-//                String dateMaxVacation = resultSet.getString("date_max_vacation");
-//
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
-//                // dodanie do listy nowego obiektu
-//
-//                Employee employeeByID = getEmployeeByID(employeeId);
-//                if(dateMaxVacation==null){
-//                    dateMaxVacation = "2010-01-01";
-//                }
-//
-//                vacationData = new VacationData(workedYears, educationType, freeDays, usedDays, employeeByID,
-//                        LocalDate.parse(startCompany, formatter), LocalDate.parse(dateMaxVacation, formatter));
-//
-//
-//                while (resultSet.next()) {
-//                // pobranie danych z rzedu
-//                int id = resultSet.getInt("id");
-//                String firstName = resultSet.getString("first_name");
-//                String lastName = resultSet.getString("last_name");
-//                String birth = resultSet.getString("birth_date");
-//                String email = resultSet.getString("e-mail");
-//                String phone= resultSet.getString("phone_number");
-//                String position = resultSet.getString("position");
-//                String status = resultSet.getString("status");
-//
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
-//                // dodanie do listy nowego obiektu
-//                employee = new Employee(id, firstName, lastName, LocalDate.parse(birth, formatter), email, phone, position, status);
-//            }
-//        } finally {
-//            close(conn, statement, resultSet);
-//        }
-//        return employee;
-//    }
+    //Zwraca listę wnisków na podstawie stanu
+    public List<ApplicationInformationView> getApplicationByStatusAndManager(String statusApplication, int employee) throws Exception {
+        List<ApplicationInformationView> applications = new ArrayList<>();
+
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            conn = dbConnect();
+
+            String sql = "SELECT * FROM application_information WHERE Status = '" + statusApplication + "'" +
+                    " AND Id_employee = " + employee;
+            statement = conn.createStatement();
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                // pobranie danych z rzedu
+                int id = resultSet.getInt("Id");
+                int employeeID = resultSet.getInt("Id_employee");
+                String leaveType = resultSet.getString("LeaveType");
+                String startDay = resultSet.getString("StartDay");
+                String endDay = resultSet.getString("EndDay");
+                int numberDay = resultSet.getInt("NumberDay");
+                String status = resultSet.getString("Status");
+                String name = resultSet.getString("Name");
+                String department = resultSet.getString("Department");
+                String projects = resultSet.getString("Projects");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
+                // dodanie do listy nowego obiektu
+                applications.add(new ApplicationInformationView(id, employeeID, leaveType, LocalDate.parse(startDay, formatter),
+                        LocalDate.parse(endDay, formatter), numberDay, status, name, department, projects));
+            }
+        } finally {
+            close(conn, statement, resultSet);
+        }
+        return applications;
+    }
 
     // Zwraca pracownika po ID
     public Employee getEmployeeByID(int employeeID) throws Exception {
