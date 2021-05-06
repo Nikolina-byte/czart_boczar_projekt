@@ -65,7 +65,10 @@ public class RegisterServlet extends HttpServlet {
 
             if(loginByEmployee!= null){
                 System.out.println("Login pracownika jest zajety");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/register_form.html");
+                dispatcher.forward(request, response);
             }
+
 
             insertEmployee = dbUtil.addEmployee(employee);
             Login login = new Login(username, password, insertEmployee);
@@ -78,6 +81,7 @@ public class RegisterServlet extends HttpServlet {
             dbUtil.addDepartmentHasEmployee(departmentByName.getId(), insertEmployee.getId());
 
             dbUtil.addManagerHasEmployee(departmentByName.getEmployee().getId(), insertEmployee.getId());
+
 
         } catch (Exception e) {
             e.printStackTrace();

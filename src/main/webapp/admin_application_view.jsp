@@ -70,8 +70,8 @@
                 <th scope="col">Liczba dni</th>
                 <th scope="col">Status wniosku</th>
                 <th scope="col">Pracownicy</th>
-                <th scope="col">department</th>
-                <th scope="col">projects</th>
+                <th scope="col">Dział</th>
+                <th scope="col">Projekty</th>
             </tr>
             </thead>
             <tbody>

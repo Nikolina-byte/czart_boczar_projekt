@@ -1,5 +1,8 @@
 <%@ page import="java.util.List" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -11,8 +14,78 @@
     <title>Employee Vacation Form</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
+
+
+    <script type="text/javascript">
+        function SetDate() {
+            var date = new Date();
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            var today = year + "-" + month + "-" + day;
+
+
+            document.getElementById('start_date').min = today;
+            document.getElementById('start_date').value = today;
+
+        }
+
+        function SetEndDate() {
+            var date = new Date();
+
+            var day = date.getDate() + 1;
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            var today = year + "-" + month + "-" + day;
+
+
+            document.getElementById('end_date').min = today;
+            document.getElementById('end_date').value = today;
+        }
+
+
+        function start() {
+            SetDate();
+            SetEndDate();
+        }
+
+    </script>
+
+    <%--    <script type="text/javascript">--%>
+    <%--        function SetNumberOfDays() {--%>
+
+
+    <%--            var type= document.getElementById('vacation_type').value;--%>
+
+    <%--            switch(type){--%>
+    <%--                case 'krwiodastwo':--%>
+    <%--                    document.getElementById('numberOfDays').value=1;--%>
+    <%--                    break;--%>
+    <%--                case 'krwiodastwo':--%>
+    <%--                    document.getElementById('numberOfDays').value=1;--%>
+    <%--                    break;--%>
+    <%--                default:--%>
+    <%--                    document.getElementById('numberOfDays').value=0;--%>
+
+    <%--            }--%>
+
+    <%--        }--%>
+    <%--    </script>--%>
+
+
 </head>
-<body>
+<body onload="start();">
+
+
 <!--pasek główny-->
 <nav class="nav" role="navigation">
     <div id="navbar" class="navbar-collapse collapse navbar-right">
@@ -25,19 +98,10 @@
     </div>
 </nav>
 
-
 <c:url var="department" value="AdminDepartmentServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
-<%--<c:url var="application" value="AdminApplicationServlet">--%>
-<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--</c:url>--%>
-<%--<c:url var="employee" value="AdminEmployeeServlet">--%>
-<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--</c:url>--%>
-<%--<c:url var="history" value="AdminHistoryServlet">--%>
-<%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--</c:url>--%>
+
 
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
@@ -64,17 +128,21 @@
         <form action="EmployeeApplicationServlet" method="get">
             <fieldset>
 
-                <!--                String leaveType, LocalDate startDate, LocalDate endDate, String status, Employee employee-->
-
                 <div class="form-group">
                     <label for="start_date">Data rozpoczęcia urlopu</label>
-                    <input type="date" class="form-control" name="start_date" id="start_date"  required>
+                    <input type="date" class="form-control" name="start_date" id="start_date" required>
                 </div>
+
 
                 <div class="form-group">
                     <label for="end_date">Data zakończenia urlopu</label>
-                    <input type="date" class="form-control" name="end_date" id="end_date"  required>
+                    <input type="date" class="form-control" name="end_date" id="end_date" required>
                 </div>
+
+                <%--                <div class="form-group">--%>
+                <%--                    <label for="numberOfDays">Liczba dni</label>--%>
+                <%--                    <input type="number" class="form-control" name="numberOfDays" id="numberOfDays" readonly="">--%>
+                <%--                </div>--%>
 
 
                 <div class="form-group">
@@ -82,7 +150,7 @@
                     <select id="vacation_type" name="vacation_type">
                         <option value="wypoczynkowy">Wypoczynkowy</option>
                         <option value="krwiodastwo">Krwiodastwo</option>
-                        <option value="wolontariat">Wolontariar</option>
+                        <option value="wolontariat">Wolontariat</option>
                         <option value="narodzenie dziecka">Narodziny dziecka</option>
                         <option value="ślub własny">Ślub własny</option>
                         <option value="pogrzeb (bardzo bliska rodzina)">Pogrzeb (bardzo bliska rodzina)</option>
@@ -98,8 +166,6 @@
 
     </div>
 </div>
-
-
 
 
 </body>
