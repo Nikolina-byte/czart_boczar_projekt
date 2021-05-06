@@ -38,21 +38,18 @@
 <%--    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
 <%--</c:url>--%>
 
-<!-- Sidebar -->
+<%--sidebar--%>
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
     <h3 class="w3-bar-item">Menu Pracownika</h3>
-    <a href="${application}" class="w3-bar-item w3-button">Informacje o dziale</a>
+    <%--    <a href="${department}" class="w3-bar-item w3-button">Informacje o dziale</a>--%>
     <div class="w3-dropdown-hover">
         <button class="w3-button">Twoje wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
-            <a href="vacation_form.jsp" class="w3-bar-item w3-button">Złóż wniosek</a>
-            <a href="employee_application_view.jsp" class="w3-bar-item w3-button">Moje wnioski</a>
+            <a href="${vacation_form}" class="w3-bar-item w3-button">Złóż wniosek</a>
             <a href=# class="w3-bar-item w3-button">Archiwum</a>
         </div>
     </div>
-    <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>
 </div>
-
 
 <!-- Page Content -->
 <div style="margin-left:25%">

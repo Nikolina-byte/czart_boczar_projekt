@@ -68,10 +68,10 @@
         <table border>
             <thead>
             <tr>
-                <th scope="col">id</th>
-                <th scope="col">name</th>
-                <th scope="col">employees</th>
-                <th scope="col">manager</th>
+                <th scope="col">Id</th>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Pracownicy</th>
+                <th scope="col">Kierownik</th>
             </tr>
             </thead>
             <tbody>

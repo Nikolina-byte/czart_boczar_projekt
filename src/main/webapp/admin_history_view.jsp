@@ -46,7 +46,7 @@
         <div class="w3-dropdown-content w3-bar-block">
             <a href="${application}" class="w3-bar-item w3-button">Do rozpatrzenia</a>
             <a href=# class="w3-bar-item w3-button">Zrealizowane</a>
-            <a href=# class="w3-bar-item w3-button">Zaakceptowane</a>
+            <a href="${accepted}" class="w3-bar-item w3-button">Zaakceptowane</a>
             <a href="${history}" class="w3-bar-item w3-button">Archiwum</a>
 
         </div>
@@ -172,110 +172,6 @@
 
     </div>
 
-
-<%--
-<h1><%= "Wnioski zaakceptowane: " %></h1>
-<table border>
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">leaveType</th>
-        <th scope="col">startDay</th>
-        <th scope="col">endDay</th>
-        <th scope="col">numberday</th>
-        <th scope="col">status</th>
-        <th scope="col">name</th>
-        <th scope="col">department</th>
-        <th scope="col">projects</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach var="tmpCereal1" items="${APPLICATIONS_LIST}">
-
-    <tr >
-        <td>${tmpCereal1.getId()}</td>
-        <td>${tmpCereal1.getLeaveType()}</td>
-        <td>${tmpCereal1.getStartDay()}</td>
-        <td>${tmpCereal1.getEndDay()}</td>
-        <td>${tmpCereal1.getNumberDay()}</td>
-        <td>${tmpCereal1.getStatusApplicationType()}</td>
-        <td>${tmpCereal1.getEmployeeName() }</td>
-        <td>${tmpCereal1.getDepartmentName()}</td>
-        <td>${tmpCereal1.getProjects()}</td>
-    </tr>
-
-    </c:forEach>
-</table>
-
-<h1><%= "Wnioski zrealizowane: " %></h1>
-<table border>
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">leaveType</th>
-        <th scope="col">startDay</th>
-        <th scope="col">endDay</th>
-        <th scope="col">numberday</th>
-        <th scope="col">status</th>
-        <th scope="col">name</th>
-        <th scope="col">department</th>
-        <th scope="col">projects</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach var="tmpCereal1" items="${ZREALIZOWANE_APPLICATIONS_LIST}">
-
-    <tr >
-        <td>${tmpCereal1.getId()}</td>
-        <td>${tmpCereal1.getLeaveType()}</td>
-        <td>${tmpCereal1.getStartDay()}</td>
-        <td>${tmpCereal1.getEndDay()}</td>
-        <td>${tmpCereal1.getNumberDay()}</td>
-        <td>${tmpCereal1.getStatusApplicationType()}</td>
-        <td>${tmpCereal1.getEmployeeName() }</td>
-        <td>${tmpCereal1.getDepartmentName()}</td>
-        <td>${tmpCereal1.getProjects()}</td>
-    </tr>
-
-    </c:forEach>
-</table>
-
-<h1><%= "Wnioski odrzucone: " %></h1>
-<table border>
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">leaveType</th>
-        <th scope="col">startDay</th>
-        <th scope="col">endDay</th>
-        <th scope="col">numberday</th>
-        <th scope="col">status</th>
-        <th scope="col">name</th>
-        <th scope="col">department</th>
-        <th scope="col">projects</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach var="tmpCereal1" items="${ODRZUCONE_APPLICATIONS_LIST}">
-
-    <tr >
-        <td>${tmpCereal1.getId()}</td>
-        <td>${tmpCereal1.getLeaveType()}</td>
-        <td>${tmpCereal1.getStartDay()}</td>
-        <td>${tmpCereal1.getEndDay()}</td>
-        <td>${tmpCereal1.getNumberDay()}</td>
-        <td>${tmpCereal1.getStatusApplicationType()}</td>
-        <td>${tmpCereal1.getEmployeeName() }</td>
-        <td>${tmpCereal1.getDepartmentName()}</td>
-        <td>${tmpCereal1.getProjects()}</td>
-    </tr>
-
-    </c:forEach>
-</table>
---%>
 
 </body>
 </html>

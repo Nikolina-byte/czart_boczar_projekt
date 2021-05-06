@@ -78,7 +78,6 @@
 </nav>
 
 
-
 <c:url var="application" value="EmployeeApplicationServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
@@ -87,20 +86,20 @@
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
 
+
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
     <h3 class="w3-bar-item">Menu Pracownika</h3>
-    <a href="${department}" class="w3-bar-item w3-button">Informacje o dziale</a>
+    <%--    <a href="${department}" class="w3-bar-item w3-button">Informacje o dziale</a>--%>
     <div class="w3-dropdown-hover">
         <button class="w3-button">Twoje wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
             <a href="${vacation_form}" class="w3-bar-item w3-button">Złóż wniosek</a>
-            <a href="${application}" class="w3-bar-item w3-button">Moje wnioski</a>
             <a href=# class="w3-bar-item w3-button">Archiwum</a>
         </div>
     </div>
-<%--    <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>--%>
 </div>
+
 <!-- Page Content -->
 
 <c:url var="applyApplication" value="EmployeeApplicationServlet">
@@ -133,10 +132,16 @@
                     <input type="date" class="form-control" name="start_date" id="start_date" required>
                 </div>
 
+
                 <div class="form-group">
                     <label for="end_date">Data zakończenia urlopu</label>
                     <input type="date" class="form-control" name="end_date" id="end_date" required>
                 </div>
+
+                <%--                <div class="form-group">--%>
+                <%--                    <label for="numberOfDays">Liczba dni</label>--%>
+                <%--                    <input type="number" class="form-control" name="numberOfDays" id="numberOfDays" readonly="">--%>
+                <%--                </div>--%>
 
 
                 <div class="form-group">
@@ -144,7 +149,7 @@
                     <select id="vacation_type" name="vacation_type">
                         <option value="wypoczynkowy">Wypoczynkowy</option>
                         <option value="krwiodastwo">Krwiodastwo</option>
-                        <option value="wolontariat">Wolontariar</option>
+                        <option value="wolontariat">Wolontariat</option>
                         <option value="narodzenie dziecka">Narodziny dziecka</option>
                         <option value="ślub własny">Ślub własny</option>
                         <option value="pogrzeb (bardzo bliska rodzina)">Pogrzeb (bardzo bliska rodzina)</option>

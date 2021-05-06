@@ -70,6 +70,7 @@ public class RegisterServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
 
+
             insertEmployee = dbUtil.addEmployee(employee);
             Login login = new Login(username, password, insertEmployee);
             dbUtil.addLoginData(login);
@@ -81,6 +82,7 @@ public class RegisterServlet extends HttpServlet {
             dbUtil.addDepartmentHasEmployee(departmentByName.getId(), insertEmployee.getId());
 
             dbUtil.addManagerHasEmployee(departmentByName.getEmployee().getId(), insertEmployee.getId());
+
 
         } catch (Exception e) {
             e.printStackTrace();

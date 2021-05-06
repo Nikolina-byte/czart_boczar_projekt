@@ -37,6 +37,9 @@
 <c:url var="history" value="AdminHistoryServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
+<c:url var="accepted" value="AdminHistoryServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
 
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
@@ -47,7 +50,7 @@
         <div class="w3-dropdown-content w3-bar-block">
             <a href="${application}" class="w3-bar-item w3-button">Do rozpatrzenia</a>
             <a href=# class="w3-bar-item w3-button">Zrealizowane</a>
-            <a href=# class="w3-bar-item w3-button">Zaakceptowane</a>
+            <a href="${accepted}" class="w3-bar-item w3-button">Zaakceptowane</a>
             <a href="${history}" class="w3-bar-item w3-button">Archiwum</a>
 
         </div>
@@ -62,43 +65,12 @@
         <h1>Witaj ${EMPLOYEE}!</h1>
     </div>
 
-<%--    <img src="img_car.jpg" alt="Car" style="width:100%">--%>
-
     <div class="w3-container">
         <p>Tu jakaś treść może motywacyjny mem</p>
     </div>
 
 
 
-<div>
-    <c:url var="department" value="AdminDepartmentServlet">
-        <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-    </c:url>
-    <c:url var="application" value="AdminApplicationServlet">
-        <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-    </c:url>
-    <c:url var="employee" value="AdminEmployeeServlet">
-        <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-    </c:url>
-    <c:url var="history" value="AdminHistoryServlet">
-        <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-    </c:url>
-
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="${department}">Informacje o departamencie</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="${application}">Wnioski do rozpatrzenia</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="${employee}">Pracownicy</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="${history}">Historia zwolnień</a>
-        </li>
-    </ul>
-</div>
 
 </div>
 <%--container koniec--%>
