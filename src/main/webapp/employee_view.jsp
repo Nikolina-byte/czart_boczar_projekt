@@ -38,7 +38,9 @@
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
 
-
+<c:url var="application" value="EmployeeActualApplicationServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
 
 <!-- Sidebar -->
 
@@ -49,6 +51,7 @@
         <button class="w3-button">Twoje wnioski urlopowe<i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block">
             <a href="${vacation_form}" class="w3-bar-item w3-button">Złóż wniosek</a>
+            <a href="${application}" class="w3-bar-item w3-button">Aktualne wnioski</a>
             <a href=# class="w3-bar-item w3-button">Archiwum</a>
         </div>
     </div>

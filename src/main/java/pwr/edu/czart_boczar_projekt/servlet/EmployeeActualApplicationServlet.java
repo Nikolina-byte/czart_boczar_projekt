@@ -58,32 +58,6 @@ public class EmployeeActualApplicationServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/employee_application_view.jsp");
         dispatcher.forward(request, response);
-        try {
-            String command = request.getParameter("command");
-
-            if (command == null)
-                command = "LIST";
-
-//            switch (command) {
-//                case "LIST":
-//                    listEmployee(request, response);
-//                    break;
-//
-//                case "UPDATE":
-//                    updateEmployee(request, response);
-//                    break;
-//
-//                case "DELETE":
-//                    deleteEmployee(request, response);
-//                    break;
-//
-//                default:
-//                    listEmployee(request, response);
-//            }
-
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
     }
 //    private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy-M-dd");
