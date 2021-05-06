@@ -81,6 +81,18 @@
 
             <c:forEach var="tmpCereal1" items="${ZLOZONE_APPLICATIONS_LIST}">
 
+            <c:url var="acceptLink" value="EmployeeActualApplicationServlet">
+                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+                <c:param name="command" value="ACCEPT"></c:param>
+                <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
+            </c:url>
+
+            <c:url var="rejctedLink" value="EmployeeActualApplicationServlet">
+                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+                <c:param name="command" value="REJECTED"></c:param>
+                <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
+            </c:url>
+
             <tr>
                 <td>${tmpCereal1.getId()}</td>
                 <td>${tmpCereal1.getLeaveType()}</td>
@@ -88,6 +100,13 @@
                 <td>${tmpCereal1.getEndDay()}</td>
                 <td>${tmpCereal1.getNumberDay()}</td>
                 <td>${tmpCereal1.getStatusApplicationType()}</td>
+                <td><a href="${modifLink}">
+                    <button type="button" class="btn btn-success">Modyfikuj</button>
+                </a>
+                    <a href="${rejctedLink}"
+                       onclick="if(!(confirm('Czy na pewno chcesz usunąć ten wniosek?'))) return false">
+                        <button type="button" class="btn btn-danger">Anuluj</button>
+                    </a></td>
             </tr>
 
             </c:forEach>
@@ -108,7 +127,19 @@
             </thead>
             <tbody>
 
+
             <c:forEach var="tmpCereal1" items="${APPLICATIONS_LIST}">
+            <c:url var="acceptLink" value="EmployeeActualApplicationServlet">
+                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+                <c:param name="command" value="ACCEPT"></c:param>
+                <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
+            </c:url>
+
+            <c:url var="rejctedLink" value="EmployeeActualApplicationServlet">
+                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+                <c:param name="command" value="REJECTED"></c:param>
+                <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
+            </c:url>
 
             <tr>
                 <td>${tmpCereal1.getId()}</td>
@@ -117,6 +148,13 @@
                 <td>${tmpCereal1.getEndDay()}</td>
                 <td>${tmpCereal1.getNumberDay()}</td>
                 <td>${tmpCereal1.getStatusApplicationType()}</td>
+                <td><a href="${modifLink}">
+                    <button type="button" class="btn btn-success">Modyfikuj</button>
+                </a>
+                    <a href="${rejctedLink}"
+                       onclick="if(!(confirm('Czy na pewno chcesz usunąć ten wniosek?'))) return false">
+                        <button type="button" class="btn btn-danger">Anuluj</button>
+                    </a></td>
             </tr>
 
             </c:forEach>

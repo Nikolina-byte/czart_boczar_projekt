@@ -388,5 +388,23 @@ public class DBUtilEmployee extends DBUtil {
         return applications;
     }
 
+    public void deleteApplication(int id) throws Exception {
 
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = dbConnect();
+
+            String sql = "DELETE FROM application WHERE id =?";
+
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+
+            statement.execute();
+
+        } finally {
+            close(conn, statement, null);
+        }
+    }
 }

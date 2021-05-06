@@ -77,19 +77,18 @@
             <tbody>
 
 
-
-<%--                <c:url var="acceptLink" value="AdminApplicationServlet">--%>
-<%--                    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--                    <c:param name="command" value="ACCEPT"></c:param>--%>
-<%--                    <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>--%>
-<%--                </c:url>--%>
-<%--    --%>
-<%--                <c:url var="rejctedLink" value="AdminApplicationServlet">--%>
-<%--                    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>--%>
-<%--                    <c:param name="command" value="REJECTED"></c:param>--%>
-<%--                    <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>--%>
-<%--                </c:url>--%>
             <c:forEach var="tmpCereal1" items="${ZLOZONE_APPLICATIONS_LIST}">
+                <c:url var="acceptLink" value="AdminApplicationServlet">
+                    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+                    <c:param name="command" value="ACCEPT"></c:param>
+                    <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
+                </c:url>
+
+                <c:url var="rejctedLink" value="AdminApplicationServlet">
+                    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+                    <c:param name="command" value="REJECTED"></c:param>
+                    <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
+                </c:url>
             <tr >
                 <td>${tmpCereal1.getId()}</td>
                 <td>${tmpCereal1.getLeaveType()}</td>
