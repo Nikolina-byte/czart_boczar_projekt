@@ -70,13 +70,15 @@
         <table border>
             <thead>
             <tr>
-                <th scope="col">id</th>
-                <th scope="col">name</th>
-                <th scope="col">birth</th>
-                <th scope="col">email</th>
-                <th scope="col">phone</th>
-                <th scope="col">department</th>
-                <th scope="col">projects</th>
+                <th scope="col">Id</th>
+                <th scope="col">Imię i nazwisko</th>
+                <th scope="col">Data urodzenia</th>
+                <th scope="col">e-mail</th>
+                <th scope="col">Telefon</th>
+                <th scope="col">Dział</th>
+                <th scope="col">Projekty</th>
+
+
 
             </tr>
             </thead>

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <head>
-    <title>Manager Panel</title>
+    <title>Employee Panel</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -24,38 +24,34 @@
     </div>
 </nav>
 
+<html var="application" value="EmployeeApplicationServlet">
+=======
+<c:url var="applyApplication" value="EmployeeApplicationServlet">
+>>>>>>> nikola
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
+<c:url var="vacation_form" value="EmployeeAddApplicationServlet">
+    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+</c:url>
 
-<c:url var="department" value="AdminDepartmentServlet">
+<c:url var="application_view" value="EmployeeApplicationServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
-<c:url var="application" value="AdminApplicationServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
-<c:url var="employee" value="AdminEmployeeServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
-<c:url var="history" value="AdminHistoryServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
-<c:url var="accepted" value="AdminHistoryServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
+
+
 
 <!-- Sidebar -->
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
-    <h3 class="w3-bar-item">Menu</h3>
-    <a href="${department}" class="w3-bar-item w3-button">Informacje o dziale</a>
-    <div class="w3-dropdown-hover">
-        <button class="w3-button">Wnioski urlopowe<i class="fa fa-caret-down"></i></button>
-        <div class="w3-dropdown-content w3-bar-block">
-            <a href="${application}" class="w3-bar-item w3-button">Do rozpatrzenia</a>
-            <a href=# class="w3-bar-item w3-button">Zrealizowane</a>
-            <a href="${accepted}" class="w3-bar-item w3-button">Zaakceptowane</a>
-            <a href="${history}" class="w3-bar-item w3-button">Archiwum</a>
 
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+    <h3 class="w3-bar-item">Menu Pracownika</h3>
+<%--    <a href="${department}" class="w3-bar-item w3-button">Informacje o dziale</a>--%>
+    <div class="w3-dropdown-hover">
+        <button class="w3-button">Twoje wnioski urlopowe<i class="fa fa-caret-down"></i></button>
+        <div class="w3-dropdown-content w3-bar-block">
+            <a href="${vacation_form}" class="w3-bar-item w3-button">Złóż wniosek</a>
+            <a href=# class="w3-bar-item w3-button">Archiwum</a>
         </div>
     </div>
-    <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>
 </div>
 
 <!-- Page Content -->
@@ -65,16 +61,17 @@
         <h1>Witaj ${EMPLOYEE}!</h1>
     </div>
 
+    <%--    <img src="img_car.jpg" alt="Car" style="width:100%">--%>
+
     <div class="w3-container">
         <p>Tu jakaś treść może motywacyjny mem</p>
+
     </div>
-
-
-
-
+    <%--    koniec container--%>
 </div>
-<%--container koniec--%>
+<%--koniec stylu--%>
 
 
 </body>
+
 </html>
