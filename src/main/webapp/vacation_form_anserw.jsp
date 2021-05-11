@@ -13,8 +13,6 @@
 </head>
 <body>
 <!--pasek główny-->
-
-<!--pasek główny-->
 <nav class="nav" role="navigation">
     <div id="navbar" class="navbar-collapse collapse navbar-right">
         <a class="btn" href="login.html" role="button">Zaloguj się</a>
@@ -26,7 +24,6 @@
     </div>
 </nav>
 
-<html var="application" value="EmployeeApplicationServlet">
 
 <c:url var="applyApplication" value="EmployeeApplicationServlet">
 
@@ -63,6 +60,7 @@
         </div>
     </div>
 </div>
+
 <!-- Page Content -->
 <div style="margin-left:25%">
 

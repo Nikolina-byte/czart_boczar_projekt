@@ -50,7 +50,6 @@
         <div class="w3-dropdown-content w3-bar-block">
             <a href="${application}" class="w3-bar-item w3-button">Do rozpatrzenia</a>
             <a href="${history}" class="w3-bar-item w3-button">Archiwum</a>
-
         </div>
     </div>
     <a href="${employee}" class="w3-bar-item w3-button">Pracownicy</a>

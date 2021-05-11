@@ -61,6 +61,8 @@
     </div>
 </div>
 
+<%--zawartość--%>
+
 <div style="margin-left:25%">
 
     <div class="w3-container">

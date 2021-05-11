@@ -64,7 +64,6 @@
 </head>
 <body onload="start();">
 
-
 <!--pasek główny-->
 <nav class="nav" role="navigation">
     <div id="navbar" class="navbar-collapse collapse navbar-right">
@@ -78,17 +77,8 @@
 </nav>
 
 
-<c:url var="application" value="EmployeeApplicationServlet">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
-
-<c:url var="vacation_form" value="vacation_form.jsp">
-    <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-</c:url>
-
-
 <c:url var="applyApplication" value="EmployeeApplicationServlet">
-    >>>>>>> nikola
+
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
 <c:url var="vacation_form" value="EmployeeAddApplicationServlet">
@@ -123,7 +113,7 @@
     </div>
 </div>
 
-<!-- Page Content -->
+<%--Page content--%>
 
 <c:url var="applyApplication" value="EmployeeApplicationServlet">
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
@@ -145,7 +135,7 @@
             <fieldset>
                 <div class="form-group">
                     <label for="employee">ID wnioskodawcy:</label>
-                    <input type="text" class="form-control" name="employee" id="employee" value=${EMPLOYEE} readonly="">
+                    <input type="text" class="form-control" name="employee" id="employee" value=${EMPLOYEE} disabled readonly>
                 </div>
 
                 <div class="form-group">

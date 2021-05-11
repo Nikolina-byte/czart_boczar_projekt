@@ -12,18 +12,6 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-<!--pasek główny-->
-<nav class="nav" role="navigation">
-    <div id="navbar" class="navbar-collapse collapse navbar-right">
-        <a class="btn" href="login.html" role="button">Zaloguj się</a>
-    </div>
-    <div class="container">
-        <ul>
-            <li><a href="index.html">Strona główna</a></li>
-        </ul>
-    </div>
-</nav>
-
 
 <c:url var="applyApplication" value="EmployeeApplicationServlet">
 
@@ -61,6 +49,7 @@
     </div>
 </div>
 
+
 <!-- Page Content -->
 <div style="margin-left:25%">
     <div class="w3-container">
@@ -69,7 +58,7 @@
         <div class="row form-group"></div>
         <div class="row form-group"></div>
         <div class="row form-group"></div>
-        <table class ="table table-striped">
+        <table class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">id</th>
@@ -123,7 +112,7 @@
         <div class="row form-group"></div>
         <div class="row form-group"></div>
         <div class="row form-group"></div>
-        <table class ="table table-striped">
+        <table class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">id</th>

@@ -24,7 +24,6 @@
     </div>
 </nav>
 
-<html var="application" value="EmployeeApplicationServlet">
 
 <c:url var="applyApplication" value="EmployeeApplicationServlet">
 
