@@ -7,8 +7,8 @@ import java.time.temporal.ChronoUnit;
 public class Test {
     public static void main(String[] args) {
         LocalDate today = LocalDate.of(2021,5, 10);
-        LocalDate nextdat = LocalDate.of(2021,5, 21);
-        System.out.println(calcWeekDays1(today, nextdat)+1);
+        LocalDate nextdat = LocalDate.of(2021,5, 10);
+        System.out.println(today.isBefore(nextdat));
     }
 
     private static long calcWeekDays1(final LocalDate start, final LocalDate end) {

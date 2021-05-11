@@ -66,7 +66,7 @@ public class DBUtilEmployee extends DBUtil {
     }
 
     // Modyfikuje wniosek -> automatycznie do zatwierdzenia
-    public void updateApplication(String empoyeeID) throws Exception {
+    public void updateApplicationRealized(String empoyeeID) throws Exception {
         Connection conn = null;
         PreparedStatement statement = null;
 
@@ -84,6 +84,31 @@ public class DBUtilEmployee extends DBUtil {
         }
     }
 
+    public void updateApplication(Application application) throws Exception {
+
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = dbConnect();
+
+            String sql = "UPDATE `application` SET " +
+                    "type_leave=" + application.getLeaveType() +
+                    ", start_date=" + application.getStartDate() +
+                    ", end_date=" + application.getEndDate() +
+                    ", status=" + application.getStatus() +
+                    ", employee_id =" + application.getEmployee().getId() +
+                    " WHERE id=" + application.getId();
+
+            statement = conn.prepareStatement(sql);
+            statement.execute();
+
+        } finally {
+            close(conn, statement, null);
+        }
+
+    }
+
     // Modyfikuje vacation data
     public void updateVacationData(VacationData vacationData) throws Exception {
         Connection conn = null;
@@ -98,9 +123,6 @@ public class DBUtilEmployee extends DBUtil {
                     "`free_days`=" + vacationData.getFreeDay() +
                     ", `used_days`=" + vacationData.getUsedDay() +
                     " WHERE `employee_id`="+vacationData.getEmployee().getId() +";";
-            System.out.println(vacationData.getFreeDay());
-            System.out.println(vacationData.getUsedDay());
-            System.out.println(vacationData.getEmployee().getId());
             statement = conn.prepareStatement(sql);
 
             statement.execute();

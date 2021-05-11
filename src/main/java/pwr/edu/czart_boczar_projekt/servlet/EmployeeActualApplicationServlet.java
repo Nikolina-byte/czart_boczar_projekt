@@ -20,9 +20,7 @@ import java.util.List;
 @WebServlet("/EmployeeActualApplicationServlet")
 public class EmployeeActualApplicationServlet extends HttpServlet {
 
-
     private DBUtilEmployee dbUtil;
-
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -32,13 +30,6 @@ public class EmployeeActualApplicationServlet extends HttpServlet {
         } catch (Exception e) {
             throw new ServletException(e);
         }
-    }
-
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
-            ServletException, IOException {
-        response.setContentType("text/html");
-
     }
 
     @Override
@@ -144,25 +135,21 @@ public class EmployeeActualApplicationServlet extends HttpServlet {
     }
 
     private void changeApplication(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String managerID = request.getParameter("employeeID");
 
+        int employeeID = Integer.parseInt(request.getParameter("employeeID"));
+        int applicationID = Integer.parseInt(request.getParameter("applicationID"));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-dd");
+        LocalDate startDate = LocalDate.parse(request.getParameter("start_date"), dtf);
+        LocalDate endDate = LocalDate.parse(request.getParameter("end_date"), dtf);
+        String leaveType = request.getParameter("vacation_type");
+        String status = "złożony";
 
-        String id = request.getParameter("applicationID");
-        Application application = dbUtil.getApplicationByID(id);
-        Employee employee = application.getEmployee();
-        VacationData vacation = dbUtil.getVacationDataByEmploye(employee.getId());
+        Employee employeeByID = dbUtil.getEmployeeByID(employeeID);
 
-        if(application.getLeaveType().equals("wypoczynkowy")) {
-            int days = calcWeekDays(application.getStartDate(), application.getEndDate()) + 1;
-            int freeDay = vacation.getFreeDay();
-            int useDay = vacation.getUsedDay();
+        Application application = new Application(applicationID, leaveType, startDate, endDate, status, employeeByID);
 
-            vacation.setFreeDay(freeDay + days);
-            vacation.setUsedDay(useDay - days);
-            dbUtil.updateVacationData(vacation);
+        dbUtil.updateApplication(application);
 
-            dbUtil.deleteApplication(Integer.parseInt(id));
-        }
         listApplication(request, response);
     }
 

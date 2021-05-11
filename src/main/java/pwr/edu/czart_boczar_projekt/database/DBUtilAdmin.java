@@ -11,8 +11,8 @@ import java.util.List;
 public class DBUtilAdmin extends DBUtil{
     private static final String URL = "jdbc:mysql://localhost:3306/holidaydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=CET";
     private static final String NAME = "root";
-//    private static final String PASSWORD = "qwerty";
-    private static final String PASSWORD = "herbatka1";
+    private static final String PASSWORD = "qwerty";
+//    private static final String PASSWORD = "herbatka1";
     private Connection connection = null;
 
     public DBUtilAdmin() {
@@ -47,7 +47,6 @@ public class DBUtilAdmin extends DBUtil{
 
         try {
             conn = dbConnect();
-
             String sql = "SELECT * FROM login_data WHERE login = '" + userLogin + "'";
             statement = conn.createStatement();
             resultSet = statement.executeQuery(sql);
@@ -81,7 +80,6 @@ public class DBUtilAdmin extends DBUtil{
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                // pobranie danych z rzedu
                 int id = resultSet.getInt("id");
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
@@ -92,7 +90,6 @@ public class DBUtilAdmin extends DBUtil{
                 String status = resultSet.getString("status");
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
-                // dodanie do listy nowego obiektu
                 employee = new Employee(id, firstName, lastName, LocalDate.parse(birth, formatter), email, phone, position, status);
             }
         } finally {
@@ -334,7 +331,6 @@ public class DBUtilAdmin extends DBUtil{
         }
     }
 
-
     public void updateBase(int employeeID) throws Exception {
         updateApplication(employeeID);
         updateVacationData(employeeID);
@@ -349,7 +345,6 @@ public class DBUtilAdmin extends DBUtil{
 
             String sql = "UPDATE `application` SET `status`='zrealizowany' WHERE `status`='zaakceptowany' AND " +
                     "`start_date`=curdate() AND employee_id=" + empoyeeID;
-
 
             statement = conn.prepareStatement(sql);
             statement.execute();
@@ -367,7 +362,6 @@ public class DBUtilAdmin extends DBUtil{
 
             String sql = " UPDATE `vacation_data` SET `free_days`=26 WHERE `date_max_vacation`=curdate() AND employee_id="+ empoyeeID;
 
-
             statement = conn.prepareStatement(sql);
             statement.execute();
         } finally {
@@ -384,14 +378,11 @@ public class DBUtilAdmin extends DBUtil{
 
         try {
             conn = dbConnect();
-
             String sql = "SELECT * FROM employee";
             statement = conn.createStatement();
-
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                // pobranie danych z rzedu
                 int id = resultSet.getInt("id");
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
@@ -402,7 +393,7 @@ public class DBUtilAdmin extends DBUtil{
                 String status = resultSet.getString("status");
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
-                // dodanie do listy nowego obiektu
+
                 employees.add(new Employee(id, firstName, lastName, LocalDate.parse(birth, formatter), email, phone, position, status));
             }
         } finally {
