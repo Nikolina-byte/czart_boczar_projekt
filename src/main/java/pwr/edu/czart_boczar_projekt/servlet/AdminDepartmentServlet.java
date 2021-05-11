@@ -14,12 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Servlet implementation class AdminDepartmentServlet
+ */
 @WebServlet("/AdminDepartmentServlet")
 public class AdminDepartmentServlet extends HttpServlet {
 
     private DBUtilManager dbUtil;
 
+    /**
+     * init method of AdminDepartmentServlet
+     * @param config
+     * @throws ServletException exception if servlet does not work
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);

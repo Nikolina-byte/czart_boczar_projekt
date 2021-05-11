@@ -18,10 +18,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Servlet implementation class EmployeeAddApplicationServlet
+ */
 @WebServlet("/EmployeeAddApplicationServlet")
 public class EmployeeAddApplicationServlet extends HttpServlet {
     private DBUtilEmployee dbUtil;
 
+    /**
+     * init method of EmployeeAddApplicationServlet
+     * @param config
+     * @throws ServletException exception if servlet does not work
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);

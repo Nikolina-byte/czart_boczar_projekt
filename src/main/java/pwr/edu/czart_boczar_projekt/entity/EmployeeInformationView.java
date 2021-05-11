@@ -2,6 +2,9 @@ package pwr.edu.czart_boczar_projekt.entity;
 
 import java.time.LocalDate;
 
+/**
+ * Class Implementation EmployeeInformationView
+ */
 public class EmployeeInformationView {
     private int id;
     private String name;
@@ -12,9 +15,17 @@ public class EmployeeInformationView {
     private String projects;
     private String manager;
 
-    public EmployeeInformationView() {
-    }
-
+    /**
+     *
+     * @param id number of employeeInformationView
+     * @param name name of employee
+     * @param birth date of birth
+     * @param email email
+     * @param phone phone
+     * @param department department
+     * @param projects projects
+     * @param manager manager
+     */
     public EmployeeInformationView(int id, String name, LocalDate birth, String email, String phone, String department, String projects,
                                    String manager) {
         this.id = id;
@@ -27,81 +38,74 @@ public class EmployeeInformationView {
         this.manager = manager;
     }
 
-    public EmployeeInformationView(EmployeeInformationView view) {
-        this.id = view.id;
-        this.name = view.name;
-        this.birth = view.birth;
-        this.email = view.email;
-        this.phone = view.phone;
-        this.department = view.department;
-        this.projects = view.projects;
-        this.manager = view.manager;
-    }
 
+    /**
+     * Method returns the id of EmployeeInformationView
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Method sets the id of EmployeeInformationView
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Methid gets the name of Employee
+     * @return name of Employee
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Method sets name of Employee
+     * @param name of Employee
+     */
     public void setName(String name) {
         this.name = name;
     }
-
-    public LocalDate getBirth() {
-        return birth;
-    }
-
-    public void setBirth(LocalDate birth) {
-        this.birth = birth;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
+    /**
+     * Method returns the name the department
+     * @return name of department
+     */
     public String getDepartment() {
         return department;
     }
 
+    /**
+     * Method sets the name of department
+     * @param department name of department
+     */
     public void setDepartment(String department) {
         this.department = department;
     }
 
-    public String getProjects() {
-        return projects;
-    }
-
-    public void setProjects(String projects) {
-        this.projects = projects;
-    }
-
+    /**
+     * Method gets the Manager
+     * @return name of manager
+     */
     public String getManager() {
         return manager;
     }
 
+    /**
+     * Method sets the manager
+     * @param manager of manager
+     */
     public void setManager(String manager) {
         this.manager = manager;
     }
 
+    /**
+     * Method toString of EmployeeInformationView
+     * @return string with information of EmployeeInformationView
+     */
     @Override
     public String toString() {
         return "EmployeeInformationView: " +

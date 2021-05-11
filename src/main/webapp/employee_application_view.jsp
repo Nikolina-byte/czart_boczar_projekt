@@ -85,9 +85,9 @@
 
             <c:forEach var="tmpCereal1" items="${ZLOZONE_APPLICATIONS_LIST}">
 
-            <c:url var="acceptLink" value="EmployeeActualApplicationServlet">
+            <c:url var="modifyLink" value="EmployeeActualApplicationServlet">
                 <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
-                <c:param name="command" value="ACCEPT"></c:param>
+                <c:param name="command" value="MODIFY"></c:param>
                 <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
             </c:url>
 
@@ -104,7 +104,7 @@
                 <td>${tmpCereal1.getEndDay()}</td>
                 <td>${tmpCereal1.getNumberDay()}</td>
                 <td>${tmpCereal1.getStatusApplicationType()}</td>
-                <td><a href="${modifLink}"
+                <td><a href="${modifyLink}"
                        onclick="if(!(confirm('Czy na pewno chcesz modyfikować ten wniosek?'))) return false">
                     <button type="button" class="btn btn-success">Modyfikuj</button>
                 </a>
