@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servlet implementation class EmployeeApplicationHistoryServlet
+ */
 @WebServlet("/EmployeeApplicationHistoryServlet")
 public class EmployeeApplicationHistoryServlet extends HttpServlet {
 
@@ -24,6 +27,11 @@ public class EmployeeApplicationHistoryServlet extends HttpServlet {
     private DBUtilEmployee dbUtil;
 
 
+    /***
+     * init method of EmployeeApplicationHistoryServlet
+     * @param config
+     * @throws ServletException exception if servlet does not work
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);

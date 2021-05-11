@@ -14,12 +14,19 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
+/**
+ * Servlet implementation class AdminEmployeeServlet
+ */
 @WebServlet("/AdminEmployeeServlet")
 public class AdminEmployeeServlet extends HttpServlet {
 
     private DBUtilManager dbUtil;
 
+    /**
+     * init method of AdminEmployeeServlet
+     * @param config
+     * @throws ServletException exception if servlet does not work
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);

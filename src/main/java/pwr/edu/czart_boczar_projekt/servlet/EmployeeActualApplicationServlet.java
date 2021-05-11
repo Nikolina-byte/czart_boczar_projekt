@@ -17,11 +17,19 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/**
+ * Servlet implementation class EmployeeActualApplicationServlet
+ */
 @WebServlet("/EmployeeActualApplicationServlet")
 public class EmployeeActualApplicationServlet extends HttpServlet {
 
     private DBUtilEmployee dbUtil;
 
+    /**
+     *
+     * @param config
+     * @throws ServletException exception if servlet does not work
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);

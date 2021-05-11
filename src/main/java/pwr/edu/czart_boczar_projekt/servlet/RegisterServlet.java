@@ -20,11 +20,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Servlet implementation class RegisterServlet
+ */
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 
     private DBUtilAdmin dbUtil;
 
+    /**
+     * init method of LoginServlet
+     * @param config
+     * @throws ServletException exception if servlet doesn't work
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -34,6 +42,7 @@ public class RegisterServlet extends HttpServlet {
             throw new ServletException(e);
         }
     }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {

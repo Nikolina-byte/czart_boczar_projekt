@@ -14,10 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servlet implementation class LoginServlet
+ */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
     private DBUtilAdmin dbUtil;
+
+    /**
+     * init method of LoginServlet
+     * @param config
+     * @throws ServletException exception if servlet does not work
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
