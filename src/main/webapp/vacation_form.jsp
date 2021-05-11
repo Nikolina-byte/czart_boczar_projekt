@@ -142,7 +142,7 @@
 
 
         <h1>Złóż wniosek o urlop</h1>
-        <form name="vacationForm" action="${applyApplication}" method="get" onsubmit="return checkDates(this);">
+        <form name="vacationForm" action="${applyApplication}" method="get" onsubmit="return checkDates();">
 
             <fieldset>
                 <div class="form-group">
@@ -181,7 +181,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Wyślij wniosek</button>
+                <button type="submit" class="btn btn-primary" onsubmit="return checkDates();">Wyślij wniosek</button>
 
             </fieldset>
         </form>
