@@ -68,10 +68,13 @@ body {
     text-decoration: none;
     transition: background .5s;
 }
+.btn danger{
+    color: darkred;
+}
 
 .btn:hover, .nav ul li:hover {
     margin: 0 auto;
-    background: #5bc0de;
+    /*background: #5bc0de;*/
     cursor: pointer;
     transition: background .5s;
 }

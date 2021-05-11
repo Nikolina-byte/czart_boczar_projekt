@@ -73,7 +73,7 @@
                 <th scope="col">Data końca urlopu</th>
                 <th scope="col">Liczba dni</th>
                 <th scope="col">Status wniosku</th>
-                <th scope="col">Pracownicy</th>
+                <th scope="col">Pracownik</th>
                 <th scope="col">Dział</th>
                 <th scope="col">Projekty</th>
             </tr>

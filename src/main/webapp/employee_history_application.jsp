@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+
+
+
 <!--pasek główny-->
 <nav class="nav" role="navigation">
     <div id="navbar" class="navbar-collapse collapse navbar-right">

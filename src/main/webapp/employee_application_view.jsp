@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<!--pasek główny-->
+<nav class="nav" role="navigation">
+    <div id="navbar" class="navbar-collapse collapse navbar-right">
+        <a class="btn" href="login.html" role="button">Zaloguj się</a>
+    </div>
+    <div class="container">
+        <ul>
+            <li><a href="index.html">Strona główna</a></li>
+        </ul>
+    </div>
+</nav>
+
 
 <c:url var="applyApplication" value="EmployeeApplicationServlet">
 
@@ -151,7 +163,7 @@
                 </a>
                     <a href="${rejctedLink}"
                        onclick="if(!(confirm('Czy na pewno chcesz usunąć ten wniosek?'))) return false">
-                        <button type="button" class="btn btn-danger">Anuluj</button>
+                        <button type="button" class="btn danger">Anuluj</button>
                     </a></td>
             </tr>
 

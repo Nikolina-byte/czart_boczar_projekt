@@ -137,23 +137,20 @@
                     <label for="employee">ID wnioskodawcy:</label>
                     <input type="text" class="form-control" name="employee" id="employee" value=${EMPLOYEE} readonly>
                 </div>
+                <div class="form-group">
+                    <label for="application_id">ID wniosku:</label>
+                    <input type="text" class="form-control" name="application" id="application_id" value=${EMPLOYEE} readonly>
+                </div>
 
                 <div class="form-group">
                     <label for="start_date">Data rozpoczęcia urlopu</label>
                     <input type="date" class="form-control" name="start_date" id="start_date" required>
                 </div>
 
-
                 <div class="form-group">
                     <label for="end_date">Data zakończenia urlopu</label>
                     <input type="date" class="form-control" name="end_date" id="end_date" required>
                 </div>
-
-                <%--                <div class="form-group">--%>
-                <%--                    <label for="numberOfDays">Liczba dni</label>--%>
-                <%--                    <input type="number" class="form-control" name="numberOfDays" id="numberOfDays" readonly="">--%>
-                <%--                </div>--%>
-
 
                 <div class="form-group">
                     <label for="vacation_type">Rodzaj urlopu</label>
@@ -169,7 +166,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Wyślij wniosek</button>
+                <button type="submit" class="btn btn-primary">Wyślij</button>
 
             </fieldset>
         </form>

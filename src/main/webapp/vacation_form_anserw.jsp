@@ -71,7 +71,9 @@
     <%--    <img src="img_car.jpg" alt="Car" style="width:100%">--%>
 
     <div class="w3-container">
-        <p>Wniosek wysłano</p>
+
+        <p>Stan swojego wniosku sprawdzisz w zakładce<br><a class="btn" href="${application}" role="button">Aktualne
+            wnioski</a></p>
     </div>
     <%--    koniec container--%>
 </div>
