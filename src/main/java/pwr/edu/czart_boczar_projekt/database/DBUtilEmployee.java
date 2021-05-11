@@ -8,18 +8,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/***
+ * The class responsible for connecting Employee to the database
+ */
 public class DBUtilEmployee extends DBUtil {
     private static final String URL = "jdbc:mysql://localhost:3306/holidaydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=CET";
-    ;
     private static final String NAME = "admin";
     private static final String PASSWORD = "Adminadmin1";
     private Connection connection = null;
 
-    public DBUtilEmployee() {
-    }
-
-    // Połączenie z bazą
+    /**
+     * The method responsible for creating a connection with the database for the admin
+     * @return A connection (session) with a specific database
+     * @throws SQLException An exception that provides information on a database access error or other errors.
+     * @throws ClassNotFoundException Thrown when an application tries to load in a class through its string name using
+     */
     public Connection dbConnect() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -38,7 +41,11 @@ public class DBUtilEmployee extends DBUtil {
         return connection;
     }
 
-    // Dodaje wniosek
+    /***
+     * the method responsible for adding the application to the database
+     * @param application a mapped object of class application
+     * @throws Exception
+     */
     public void addApplication(Application application) throws Exception {
 
         Connection conn = null;
@@ -65,25 +72,11 @@ public class DBUtilEmployee extends DBUtil {
         }
     }
 
-    // Modyfikuje wniosek -> automatycznie do zatwierdzenia
-    public void updateApplicationRealized(String empoyeeID) throws Exception {
-        Connection conn = null;
-        PreparedStatement statement = null;
-
-        try {
-            conn = dbConnect();
-
-            String sql = "UPDATE `application` SET `status`='zrealizowany' WHERE `status`='zaakceptowany' AND " +
-                    "`start_date`=curdate() AND employee_id=" + empoyeeID;
-
-
-            statement = conn.prepareStatement(sql);
-            statement.execute();
-        } finally {
-            close(conn, statement, null);
-        }
-    }
-
+    /***
+     * the method responsible for updating the application
+     * @param application a mapped object of class application
+     * @throws Exception
+     */
     public void updateApplication(Application application) throws Exception {
 
         Connection conn = null;
@@ -109,7 +102,11 @@ public class DBUtilEmployee extends DBUtil {
 
     }
 
-    // Modyfikuje vacation data
+    /***
+     * method responsible for updating holiday data
+     * @param vacationData a mapped class object with holiday data
+     * @throws Exception
+     */
     public void updateVacationData(VacationData vacationData) throws Exception {
         Connection conn = null;
         PreparedStatement statement = null;
@@ -131,7 +128,13 @@ public class DBUtilEmployee extends DBUtil {
         }
     }
 
-    //Zwraca listę wnisków na podstawie stanu
+    /***
+     * method responsible for receiving the application based on the status and manager
+     * @param statusApplication the status of the application
+     * @param employee a mapped employee class object, which defines the manager
+     * @return List of matched applications
+     * @throws Exception
+     */
     public List<ApplicationInformationView> getApplicationByStatusAndManager(String statusApplication, int employee) throws Exception {
         List<ApplicationInformationView> applications = new ArrayList<>();
 
@@ -172,7 +175,12 @@ public class DBUtilEmployee extends DBUtil {
         return applications;
     }
 
-    // Zwraca pracownika po ID
+    /***
+     * method that returns the employee object after the id
+     * @param employeeID emplyee's id
+     * @return a mapped employee class object
+     * @throws Exception
+     */
     public Employee getEmployeeByID(int employeeID) throws Exception {
         Employee employee = null;
         Connection conn = null;
@@ -188,7 +196,6 @@ public class DBUtilEmployee extends DBUtil {
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                // pobranie danych z rzedu
                 int id = resultSet.getInt("id");
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
@@ -209,43 +216,12 @@ public class DBUtilEmployee extends DBUtil {
     }
 
 
-    // Zwraca pracownika po ID
-    public EmployeeInformationView getEmployeeViewByID(int employeeID) throws Exception {
-        EmployeeInformationView employee = null;
-        Connection conn = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            conn = dbConnect();
-
-            String sql = "SELECT * FROM user_information WHERE id = " + employeeID;
-            statement = conn.createStatement();
-
-            resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                // pobranie danych z rzedu
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("Name");
-                String birth = resultSet.getString("Birth");
-                String email = resultSet.getString("E-mail");
-                String phone= resultSet.getString("Phone");
-                String department = resultSet.getString("Department");
-                String projects = resultSet.getString("Projects");
-                String manager = resultSet.getString("Manager");
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
-                // dodanie do listy nowego obiektu
-                employee = new EmployeeInformationView(id, name, LocalDate.parse(birth, formatter), email, phone, department, projects, manager);
-            }
-        } finally {
-            close(conn, statement, resultSet);
-        }
-        return employee;
-    }
-
-    // Zwraca pracownika po ID
+    /***
+     * method responsible for receiving data on holidays on the basis of employee id
+     * @param employeeID the id of the selected employee
+     * @return vacation data object mapped
+     * @throws Exception
+     */
     public VacationData getVacationDataByEmploye(int employeeID) throws Exception {
         VacationData vacationData = null;
         Connection conn = null;
@@ -286,12 +262,12 @@ public class DBUtilEmployee extends DBUtil {
         return vacationData;
     }
 
-
-    // Anuluje wniosek - ? -> potem do zatwierdzenia
-
-
-
-    //Zwraca wniosek na podstawie ID wniosku
+    /***
+     * the method responsible for receiving the request based on the ID
+     * @param applicationID the id of the composite application
+     * @return a mapped object of class application
+     * @throws Exception
+     */
     public Application getApplicationByID(String applicationID) throws Exception {
         Application application = null;
 
@@ -327,48 +303,15 @@ public class DBUtilEmployee extends DBUtil {
         return application;
     }
 
-    //zwraca listę wniosków dla danego pracownika
-    public List<ApplicationInformationView> getApplicationListByIDemployee(int employeeID) throws SQLException, ClassNotFoundException {
-        List<ApplicationInformationView> applications = new ArrayList<>();
 
-        Connection conn = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-
-        try {
-            conn = dbConnect();
-
-            String sql = "SELECT * FROM application_information WHERE Id_employee = " + employeeID;
-            statement = conn.createStatement();
-
-            resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                // pobranie danych z rzedu
-                int id = resultSet.getInt("id");
-                int id_employee = resultSet.getInt("Id_employee");
-                String leaveType = resultSet.getString("LeaveType");
-                String startDay = resultSet.getString("StartDay");
-                String endDay = resultSet.getString("EndDay");
-                int numberDay = resultSet.getInt("NumberDay");
-                String status = resultSet.getString("Status");
-                String employee = resultSet.getString("Name");
-                String department = resultSet.getString("Department");
-                String projects = resultSet.getString("Projects");
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
-                // dodanie do listy nowego obiektu
-                applications.add(new ApplicationInformationView(id, id_employee, leaveType, LocalDate.parse(startDay, formatter),
-                        LocalDate.parse(endDay, formatter), numberDay, status, employee, department, projects));
-            }
-        } finally {
-            close(conn, statement, resultSet);
-        }
-        return applications;
-    }
-
-
+    /***
+     * the method responsible for returning the conclusion based on the status and id empolyer
+     * @param statusApplication the status of the selected application
+     * @param employeeID the id of the selected employee
+     * @return a list of matching application objects
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public List<ApplicationInformationView> getApplicationsByStatusAndEmployeeID(String statusApplication, int employeeID) throws SQLException, ClassNotFoundException {
         List<ApplicationInformationView> applications = new ArrayList<>();
 
@@ -410,6 +353,11 @@ public class DBUtilEmployee extends DBUtil {
         return applications;
     }
 
+    /***
+     * method responsible for removing the application from the database
+     * @param id id of the selected application
+     * @throws Exception
+     */
     public void deleteApplication(int id) throws Exception {
 
         Connection conn = null;

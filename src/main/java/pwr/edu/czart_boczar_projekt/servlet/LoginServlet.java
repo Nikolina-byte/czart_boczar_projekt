@@ -1,5 +1,6 @@
 package pwr.edu.czart_boczar_projekt.servlet;
 
+import pwr.edu.czart_boczar_projekt.HashCalculator;
 import pwr.edu.czart_boczar_projekt.database.DBUtilAdmin;
 import pwr.edu.czart_boczar_projekt.entity.Employee;
 import pwr.edu.czart_boczar_projekt.entity.Login;
@@ -28,6 +29,13 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    /***
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
         response.setContentType("text/html");
@@ -44,7 +52,7 @@ public class LoginServlet extends HttpServlet {
             Login loginData = dbUtil.getLoginData(login);
 
             if (!(loginData == null)) {
-                if (password.equals(loginData.getPassword())) {
+                if(HashCalculator.validatePassword(password, loginData.getPassword())){
                     if (loginData.getEmployee().getPosition().equals("manager")) {
                         request.setAttribute("EMPLOYEE", loginData.getEmployee().getId());
                         System.out.println(loginData.getEmployee().getId());

@@ -1,5 +1,6 @@
 package pwr.edu.czart_boczar_projekt.database;
 
+import pwr.edu.czart_boczar_projekt.HashCalculator;
 import pwr.edu.czart_boczar_projekt.entity.*;
 
 import java.sql.*;
@@ -8,6 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * The class responsible for connecting Admin to the database
+ */
 public class DBUtilAdmin extends DBUtil{
     private static final String URL = "jdbc:mysql://localhost:3306/holidaydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=CET";
     private static final String NAME = "root";
@@ -15,10 +19,18 @@ public class DBUtilAdmin extends DBUtil{
 //    private static final String PASSWORD = "herbatka1";
     private Connection connection = null;
 
+    /**
+     * The parameterless constructor
+     */
     public DBUtilAdmin() {
     }
 
-    // Połączenie z bazą
+    /**
+     * The method responsible for creating a connection with the database for the admin
+     * @return A connection (session) with a specific database
+     * @throws SQLException An exception that provides information on a database access error or other errors.
+     * @throws ClassNotFoundException Thrown when an application tries to load in a class through its string name using
+     */
     public Connection dbConnect() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -37,7 +49,12 @@ public class DBUtilAdmin extends DBUtil{
         return connection;
     }
 
-    // Zwraca wszystkich pracowników
+    /**
+     * Method that returns login data by user id
+     * @param userLogin user's ID
+     * @return a mapped array object storing logins and passwords
+     * @throws Exception
+     */
     public Login getLoginData(String userLogin) throws Exception {
         Login login = null;
 
@@ -64,7 +81,12 @@ public class DBUtilAdmin extends DBUtil{
         return login;
     }
 
-    // Zwraca pracownika po ID
+    /***
+     * method that returns the employee object after the id
+     * @param employeeID emplyee's id
+     * @return a mapped employee class object
+     * @throws Exception
+     */
     public Employee getEmployeeByID(int employeeID) throws Exception {
         Employee employee = null;
         Connection conn = null;
@@ -98,7 +120,12 @@ public class DBUtilAdmin extends DBUtil{
         return employee;
     }
 
-    // Dodaje użytkownika
+    /***
+     * method responsible for adding a user
+     * @param employee a mapped employee class object
+     * @return employe class object with id set
+     * @throws Exception
+     */
     public Employee addEmployee(Employee employee) throws Exception {
 
         Connection conn = null;
@@ -131,7 +158,12 @@ public class DBUtilAdmin extends DBUtil{
         return employee;
     }
 
-    // Zwraca pracownika po ID
+    /***
+     * The employee return method after all
+     * @param employee a mapped employee class object
+     * @return a mapped employee class object with id
+     * @throws Exception
+     */
     public Employee getEmployeeByEverything(Employee employee) throws Exception {
         Connection conn = null;
         Statement statement = null;
@@ -151,7 +183,7 @@ public class DBUtilAdmin extends DBUtil{
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                // pobranie danych z rzedu
+
                 int id = resultSet.getInt("id");
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
@@ -162,7 +194,7 @@ public class DBUtilAdmin extends DBUtil{
                 String status = resultSet.getString("status");
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
-                // dodanie do listy nowego obiektu
+
                 employee = new Employee(id, firstName, lastName, LocalDate.parse(birth, formatter), email, phone, position, status);
             }
         } finally {
@@ -171,7 +203,11 @@ public class DBUtilAdmin extends DBUtil{
         return employee;
     }
 
-    // Dodaje vacation_data
+    /***
+     * method responsible for adding information about user's vacation days
+     * @param vacationData a mapped vacation data class object with id
+     * @throws Exception
+     */
     public void addVacationData(VacationData vacationData) throws Exception {
 
         Connection conn = null;
@@ -200,7 +236,11 @@ public class DBUtilAdmin extends DBUtil{
         }
     }
 
-    // Dodaje vacation_data
+    /***
+     * method responsible for adding login data to the database
+     * @param login a mapped login class object with id
+     * @throws Exception
+     */
     public void addLoginData(Login login) throws Exception {
 
         Connection conn = null;
@@ -214,7 +254,7 @@ public class DBUtilAdmin extends DBUtil{
 
             statement = conn.prepareStatement(sql);
             statement.setString(1, login.getLogin());
-            statement.setString(2, login.getPassword());
+            statement.setString(2, HashCalculator.hashSHA256(login.getPassword()));
             statement.setInt(3, login.getEmployee().getId());
             statement.execute();
             //dropnij baze i dodaj iddo
@@ -223,6 +263,13 @@ public class DBUtilAdmin extends DBUtil{
         }
     }
 
+    /***
+     * method providing login by login data
+     * @param loginInput entered login when logging in
+     * @return a mapped login class object
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public Login getLoginByLogin(String loginInput) throws SQLException, ClassNotFoundException {
         Login login = null;
         Connection conn = null;
@@ -255,7 +302,12 @@ public class DBUtilAdmin extends DBUtil{
         return login;
     }
 
-    // Zwraca wszystkich departamentów
+    /***
+     * method responsible for retrieving departments by name
+     * @param nameDepartment the name of the department concerned
+     * @return a mapped department object
+     * @throws Exception
+     */
     public Department getDepartmentByName(String nameDepartment) throws Exception {
         Department departament = null;
 
@@ -285,7 +337,12 @@ public class DBUtilAdmin extends DBUtil{
         return departament;
     }
 
-    // Dodaje pracownika do departamentu
+    /***
+     * method responsible for adding employees to a given department
+     * @param departmentID the id of the selected department
+     * @param employeeID the id of the selected employee
+     * @throws Exception
+     */
     public void addDepartmentHasEmployee(int departmentID, int employeeID) throws Exception {
 
         Connection conn = null;
@@ -308,7 +365,12 @@ public class DBUtilAdmin extends DBUtil{
         }
     }
 
-    // Przypisuje pracownika do managera
+    /***
+     * the method responsible for assigning employees to the manager
+     * @param managerID the id of the selected manager
+     * @param employeeID the id of the selected employee
+     * @throws Exception
+     */
     public void addManagerHasEmployee(int managerID, int employeeID) throws Exception {
 
         Connection conn = null;
@@ -331,10 +393,54 @@ public class DBUtilAdmin extends DBUtil{
         }
     }
 
+    /***
+     * a method responsible for updating applications and employee vacation data
+     * @param employeeID the id of the selected employee
+     * @throws Exception
+     */
     public void updateBase(int employeeID) throws Exception {
         updateApplication(employeeID);
         updateVacationData(employeeID);
     }
+
+    /***
+     * a method that returns a list of all employers
+     * @return a list of employee class objects
+     * @throws Exception
+     */
+    public List<Employee> getEmployees() throws Exception {
+        List<Employee> employees = new ArrayList<>();
+
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            conn = dbConnect();
+            String sql = "SELECT * FROM employee";
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String birth = resultSet.getString("birth_date");
+                String email = resultSet.getString("e-mail");
+                String phone= resultSet.getString("phone_number");
+                String position = resultSet.getString("position");
+                String status = resultSet.getString("status");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
+
+                employees.add(new Employee(id, firstName, lastName, LocalDate.parse(birth, formatter), email, phone, position, status));
+            }
+        } finally {
+            close(conn, statement, resultSet);
+        }
+        return employees;
+    }
+
 
     private void updateApplication(int empoyeeID) throws Exception {
         Connection conn = null;
@@ -367,38 +473,5 @@ public class DBUtilAdmin extends DBUtil{
         } finally {
             close(conn, statement, null);
         }
-    }
-
-    public List<Employee> getEmployees() throws Exception {
-        List<Employee> employees = new ArrayList<>();
-
-        Connection conn = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            conn = dbConnect();
-            String sql = "SELECT * FROM employee";
-            statement = conn.createStatement();
-            resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                String birth = resultSet.getString("birth_date");
-                String email = resultSet.getString("e-mail");
-                String phone= resultSet.getString("phone_number");
-                String position = resultSet.getString("position");
-                String status = resultSet.getString("status");
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
-
-                employees.add(new Employee(id, firstName, lastName, LocalDate.parse(birth, formatter), email, phone, position, status));
-            }
-        } finally {
-            close(conn, statement, resultSet);
-        }
-        return employees;
     }
 }
