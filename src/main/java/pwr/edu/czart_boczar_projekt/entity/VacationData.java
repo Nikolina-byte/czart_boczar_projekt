@@ -140,7 +140,7 @@ public class VacationData {
     }
 
     private LocalDate createDateMaxVacation(){
-        int years = getWorkedYears() + switchEducationToYears() + getWorkedYears();
+        int years = getWorkedYears() + switchEducationToYears();
         LocalDate today = LocalDate.now();
         Duration difference = Duration.between(getStartCompany().atStartOfDay(), today.atStartOfDay());
         long days = difference.toDays();

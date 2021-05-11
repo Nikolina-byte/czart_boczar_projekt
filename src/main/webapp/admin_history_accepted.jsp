@@ -68,7 +68,10 @@
 
         <h1><%= "Wnioski zrealizowane: " %>
         </h1>
-        <table border>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <table class ="table table-striped">
             <thead>
             <tr>
                 <th scope="col">id</th>
@@ -100,6 +103,9 @@
 
             </c:forEach>
         </table>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
 
 
     </div>

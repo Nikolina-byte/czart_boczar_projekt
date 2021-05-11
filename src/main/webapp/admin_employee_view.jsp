@@ -62,7 +62,10 @@
     <div class="w3-container">
         <h1><%= "Pracownicy projektu 1:" %>
         </h1>
-        <table border>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <table class ="table table-striped">
             <thead>
             <tr>
                 <th scope="col">Id</th>
@@ -103,6 +106,9 @@
 
             </c:forEach>
         </table>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
     </div>
 </div>
 

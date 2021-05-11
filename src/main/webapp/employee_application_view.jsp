@@ -26,7 +26,7 @@
 
 
 <c:url var="applyApplication" value="EmployeeApplicationServlet">
-    >>>>>>> nikola
+
     <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
 </c:url>
 <c:url var="vacation_form" value="EmployeeAddApplicationServlet">
@@ -66,7 +66,10 @@
     <div class="w3-container">
         <h1><%= "Wnioski złożone: " %>
         </h1>
-        <table border>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <table class ="table table-striped">
             <thead>
             <tr>
                 <th scope="col">id</th>
@@ -111,10 +114,16 @@
 
             </c:forEach>
         </table>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
 
         <h1><%= "Wnioski zaakceptowane: " %>
         </h1>
-        <table border>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <table class ="table table-striped">
             <thead>
             <tr>
                 <th scope="col">id</th>
@@ -159,6 +168,9 @@
 
             </c:forEach>
         </table>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
     </div>
 
     <%--    koniec container--%>

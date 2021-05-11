@@ -68,8 +68,8 @@ public class EmployeeApplicationServlet extends HttpServlet {
                 } else {
                     System.out.println("Nie ma dni");
 //                    request.setAttribute("EMPLOYEE", employeeID);
-//                    RequestDispatcher dispatcher = request.getRequestDispatcher("/vacation_form_anserw.jsp");
-//                    dispatcher.forward(request, response);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/vacation_form_anserw.jsp");
+                    dispatcher.forward(request, response);
                 }
             }
 
