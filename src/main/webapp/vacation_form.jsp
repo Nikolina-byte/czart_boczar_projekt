@@ -171,7 +171,7 @@
                     <label for="vacation_type">Rodzaj urlopu</label>
                     <select id="vacation_type" name="vacation_type">
                         <option value="wypoczynkowy">Wypoczynkowy</option>
-                        <option value="krwiodastwo">Krwiodastwo</option>
+                        <option value="krwiodastwo">Krwiodawstwo</option>
                         <option value="wolontariat">Wolontariat</option>
                         <option value="narodzenie dziecka">Narodziny dziecka</option>
                         <option value="ślub własny">Ślub własny</option>

@@ -131,6 +131,8 @@
 
         <h1>Złóż wniosek o urlop</h1>
         <form action="${applyApplication}" method="get">
+            <input type="hidden" name="command" value="UPDATE"/>
+            <input type="hidden" name="applicationID" value="${APPLICATION.id}"/>
 
             <fieldset>
                 <div class="form-group">
