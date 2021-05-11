@@ -52,11 +52,23 @@
             document.getElementById('end_date').value = today;
         }
 
+        function checkDates() {
+
+            var endDate = document.getElementById("end_date").value;
+            var startDate = document.getElementById("start_date").value;
+            if ((Date.parse(startDate) >= Date.parse(endDate))) {
+                alert("End date should be greater than Start date");
+                document.getElmentById("EndDate").value = "";
+                return false;
+            }
+        }
+
 
         function start() {
             SetDate();
             SetEndDate();
         }
+
 
     </script>
 
@@ -130,7 +142,7 @@
 
 
         <h1>Złóż wniosek o urlop</h1>
-        <form action="${applyApplication}" method="get">
+        <form name="vacationForm" action="${applyApplication}" method="get" onsubmit="return checkDates(this);">
 
             <fieldset>
                 <div class="form-group">

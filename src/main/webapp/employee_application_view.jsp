@@ -104,12 +104,13 @@
                 <td>${tmpCereal1.getEndDay()}</td>
                 <td>${tmpCereal1.getNumberDay()}</td>
                 <td>${tmpCereal1.getStatusApplicationType()}</td>
-                <td><a href="${modifLink}">
+                <td><a href="${modifLink}"
+                       onclick="if(!(confirm('Czy na pewno chcesz modyfikować ten wniosek?'))) return false">
                     <button type="button" class="btn btn-success">Modyfikuj</button>
                 </a>
                     <a href="${rejctedLink}"
                        onclick="if(!(confirm('Czy na pewno chcesz usunąć ten wniosek?'))) return false">
-                        <button type="button" class="btn btn-danger">Anuluj</button>
+                        <button type="button" class="btn danger">Anuluj</button>
                     </a></td>
             </tr>
 
@@ -151,6 +152,12 @@
                 <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
             </c:url>
 
+            <c:url var="modifyLink" value="EmployeeActualApplicationServlet">
+                <c:param name="employeeID" value="${EMPLOYEE}"></c:param>
+                <c:param name="command" value="MODIFY"></c:param>
+                <c:param name="applicationID" value="${tmpCereal1.id}"></c:param>
+            </c:url>
+
             <tr>
                 <td>${tmpCereal1.getId()}</td>
                 <td>${tmpCereal1.getLeaveType()}</td>
@@ -158,12 +165,13 @@
                 <td>${tmpCereal1.getEndDay()}</td>
                 <td>${tmpCereal1.getNumberDay()}</td>
                 <td>${tmpCereal1.getStatusApplicationType()}</td>
-                <td><a href="${modifLink}">
+                <td><a href="${modifyLink}"
+                       onclick="if(!(confirm('Czy na pewno chcesz modyfikować ten wniosek?'))) return false">
                     <button type="button" class="btn btn-success">Modyfikuj</button>
                 </a>
                     <a href="${rejctedLink}"
                        onclick="if(!(confirm('Czy na pewno chcesz usunąć ten wniosek?'))) return false">
-                        <button type="button" class="btn danger">Anuluj</button>
+                        <button type="button" class="btn btn-danger">Anuluj</button>
                     </a></td>
             </tr>
 

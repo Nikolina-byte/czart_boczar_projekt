@@ -78,7 +78,7 @@ public class EmployeeActualApplicationServlet extends HttpServlet {
                     listApplication(request, response);
                     break;
 
-                case "ACCEPT":
+                case "MODIFY":
                     changeApplication(request, response);
                     break;
 
@@ -143,8 +143,27 @@ public class EmployeeActualApplicationServlet extends HttpServlet {
         listApplication(request, response);
     }
 
-    private void changeApplication(HttpServletRequest request, HttpServletResponse response) {
+    private void changeApplication(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String managerID = request.getParameter("employeeID");
+
+
+        String id = request.getParameter("applicationID");
+        Application application = dbUtil.getApplicationByID(id);
+        Employee employee = application.getEmployee();
+        VacationData vacation = dbUtil.getVacationDataByEmploye(employee.getId());
+
+        if(application.getLeaveType().equals("wypoczynkowy")) {
+            int days = calcWeekDays(application.getStartDate(), application.getEndDate()) + 1;
+            int freeDay = vacation.getFreeDay();
+            int useDay = vacation.getUsedDay();
+
+            vacation.setFreeDay(freeDay + days);
+            vacation.setUsedDay(useDay - days);
+            dbUtil.updateVacationData(vacation);
+
+            dbUtil.deleteApplication(Integer.parseInt(id));
+        }
+        listApplication(request, response);
     }
 
     private static int calcWeekDays(final LocalDate start, final LocalDate end) {
