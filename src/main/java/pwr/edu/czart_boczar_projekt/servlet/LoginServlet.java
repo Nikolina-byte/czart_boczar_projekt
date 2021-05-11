@@ -57,9 +57,17 @@ public class LoginServlet extends HttpServlet {
                     }
                 }
             }
+            else{
+                request.setAttribute("message", "Invalid");
+                request.getRequestDispatcher("login_alert.jsp").forward(request,response);
+
+            }
         } catch (Exception e) {
             System.out.println("NIE MA TAKIEGO LOGINU");
             e.printStackTrace();
+            request.setAttribute("message", "Invalid");
+            response.sendRedirect("/login_alert.jsp");
+
         }
     }
 

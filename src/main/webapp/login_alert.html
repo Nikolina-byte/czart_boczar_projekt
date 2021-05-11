@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Logowanie</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+
+
+    <style> .header {
+        background: url(./img/img2.jpg) no-repeat center center;
+        background-size: cover;
+        height: 500px;
+        text-align: center;
+    }
+    </style>
+
+</head>
+<body>
+
+
+<div class="nav">
+    <div class="container">
+        <ul>
+            <li><a href="index.html">Strona główna</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="header">
+</div>
+
+
+<div class="row form-group"></div>
+<div class="row form-group"></div>
+<div class="row form-group"></div>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Zaloguj się</h1>
+        <h2>Niepoprawne dane. SPróbuj jeszcze raz</h2>
+
+        <form action="LoginServlet" method="post">
+            <div class="form-group">
+                <label for="loginInput">Login</label>
+                <label>
+                    <input type="text" class="form-control" name="loginInput" id = "loginInput" placeholder="Wprowadź login" required>
+                </label>
+                <small id="emailHelp" class="form-text text-muted">Login powinien mieć długość 4 znaków.</small>
+            </div>
+            <div class="form-group">
+                <label for="passwordInput">Hasło</label>
+                <label>
+                    <input type="password" class="form-control" id = "passwordInput" name="passwordInput" placeholder="Hasło" required>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Dalej</button>
+            <br>
+            <small class="form-text text-muted">Nie masz jeszcze konta? Założysz je <a link href="register_form.html">tutaj</a></small>
+
+        </form>
+
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
